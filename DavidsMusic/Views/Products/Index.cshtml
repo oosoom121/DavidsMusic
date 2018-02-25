@@ -1,0 +1,27 @@
+﻿@model DavidsMusic.Models.ProductsViewModel
+@{
+	ViewData["Title"] = "Products Page";
+}
+
+<header class="pages">Your store items here</header>
+<h3></h3>
+
+<div class="row">
+	<div class="col-4">
+
+		<img src="@Model.ImageUrl" alt="@Model.Brand" class="img-fluid" />
+	</div>
+	<div class="col-8">
+		<dl>
+			<dt>Item</dt>
+			<dd>@Model.Brand  (item number: @Model.StockNumber)</dd>
+			<dt>Description</dt>
+			<dd>@Model.Description</dd>
+		</dl>
+		<form asp-action="index" asp-controller="products" method="post">
+			<input type="hidden" name="id" value="@Model.Brand" />
+			<input type="submit" value="Gimme My Stuff!" />
+		</form>
+
+	</div>
+</div>

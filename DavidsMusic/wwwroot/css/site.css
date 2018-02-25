@@ -1,10 +1,9 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
+﻿
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
+body {
+	background-image: url(/images/music-sheet.jpg)
+}	
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -16,13 +15,114 @@
     line-height: 1.4;
 }
 
+/* Checkout Page */
+.checkoutForm {
+	display: flex;
+	float: left;
+	width: 70%;
+	margin-right: 2px;
+	margin-left: 2px;
+}
+.regForm {
+	display: flex;
+	width: 70%;
+}
+
+.checkoutSidebar {
+	width:25%;
+	height:440px;
+	border-radius: 25px;
+	background-color:lightgray;
+
+}
+
+.ego {
+	font-size: 4em;
+}
+
+footer {
+	width:100%;
+	height:4em;
+	color:white;
+	text-align: center;
+	clear:both;
+
+}
+form {
+	width: 90%
+}
+
+.mutedbackground {
+	background-color: rgba(224, 224, 224, 0.5);
+}
+.pages {
+	background: linear-gradient(0deg, #343A47, silver 20%, #343A47 65%);
+	color:whitesmoke;
+	font-size: 3em;
+	text-align: center;
+	font-family: sans-serif;
+	font-weight: bold;
+	font-style: oblique;
+	border-radius: 1.2em;
+}
+
+
+.regButt {
+	background: linear-gradient(0deg, #343A47, silver 20%, #343A47 65%);
+	color: cornsilk;
+}
+/*
+.regcard {
+	display:block;
+	width:30%;
+	border-radius:15%;
+	font-family:Verdana, sans-serif;
+	font-weight:bold;
+	font-size:1.3em;
+	text-indent:3px;
+	margin:0 auto;
+	background-color:lightgray;
+}
+
+.regpage {
+	border-top-left-radius: 7%;
+	border-top-right-radius: 7%;
+	background-color:cornsilk;
+}
+*/
+.topLogo {
+	animation-name: spin;
+	animation-duration: 8000ms;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	/*transform: rotate(3deg); */
+	/* transform: rotate(0.3rad);/ */
+	/* transform: rotate(3grad); */
+	/* transform: rotate(.03turn);  */
+}
+
+
+/* city state zip */
+.city {
+	width: 60%;
+	float:left;
+}
+.state {
+	width: 25%;
+	float: left;
+}
+.postal {
+	width: 15%;
+	float: left;
+}
+
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
 }
 
-/* QR code generator */
-#qrCode {
+	/* QR code generator */
+	#qrCode {
     margin: 15px;
 }
 
@@ -32,4 +132,14 @@
     .carousel-caption {
         display: none;
     }
+}
+
+@keyframes spin {
+	from {
+		transform: rotateY(0deg);
+	}
+
+	to {
+		transform: rotateY(360deg);
+	}
 }

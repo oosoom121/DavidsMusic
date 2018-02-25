@@ -1,0 +1,90 @@
+﻿@model DavidsMusic.Models.RegisterModel
+@{
+	ViewData["Title"] = "Register";
+}
+<main class="regpage">
+	<section class="bg-dark p-0 m-0">
+		<header class="pages">@ViewData["Title"]</header>
+	</section>
+
+	<div asp-validation-summary="All"></div>
+	@if (!this.ViewContext.ModelState.IsValid)
+	{
+		<div class="alert alert-danger">
+			@Html.ValidationSummary(false)
+		</div>
+	}
+
+	<section class="regForm mutedbackground m-auto">
+		<!---form method="post" asp-action="register" asp-controller="account"-->
+		<form id="bootstrap-overrides" method="post" action="RegCustDetails">
+			@Html.AntiForgeryToken()
+			<fieldset>
+				<legend>Registration Information</legend>
+				@Html.LabelFor(m => m.RegFirstName)
+				@Html.TextBoxFor(m => m.RegFirstName, new { @class = "form-control", placeholder = "First Name" })
+				@Html.LabelFor(m => m.RegLastName)
+				@Html.TextBoxFor(m => m.RegLastName, new { @class = "form-control", placeholder = "Last Name" })
+				@Html.LabelFor(m => m.RegAddress1)
+				@Html.TextBoxFor(m => m.RegAddress1, new { @class = "form-control", placeholder = "Address 1" })
+				@Html.LabelFor(m => m.RegAddress2)
+				@Html.TextBoxFor(m => m.RegAddress2, new { @class = "form-control", placeholder = "Address 2" })
+
+				<div class="col-5 d-inline-flex m-0 p-0">
+					@Html.LabelFor(m => m.RegCity)
+				</div>
+				<div class="col-4 d-inline-flex m-0 p-0">
+					@Html.LabelFor(m => m.RegState)
+				</div>
+				<div class="col-2 d-inline-flex  m-0 p-0">
+					@Html.LabelFor(m => m.RegPostal)
+				</div>
+				<div class="col-5 d-inline-flex form-group mt-0 p-0">
+					@Html.TextBoxFor(m => m.RegCity, new { @class = (ViewData.ModelState.ContainsKey("RegCity") && ViewData.ModelState.FirstOrDefault(x => x.Key == "RegCity").Value.ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid ? "form-control is-invalid" : "form-control") })
+					<span asp-validation-for="RegCity" class="invalid-feedback"></span>
+				</div>
+				<div class="col-4 d-inline-flex form-group mt-0 p-0">
+					@Html.DropDownListFor(m => m.RegState, ((string[])ViewData["RegStates"]).Select(x => new SelectListItem { Text = x, Value = x }), new { @class = "form-control" })
+				</div>
+				<div class="col-2 d-inline-flex form-group mt-0 p-0">
+					@Html.TextBoxFor(m => m.RegPostal, new { @class = "form-control", placeholder = "Postal Code" })
+				</div>
+				@Html.LabelFor(m => m.RegHomePhone)
+				@Html.TextBoxFor(m => m.RegHomePhone, new { @class = "form-control", placeholder = "Home Phone" })
+				@Html.LabelFor(m => m.RegCellPhone)
+				@Html.TextBoxFor(m => m.RegCellPhone, new { @class = "form-control", placeholder = "Cell Phone" })
+				@Html.LabelFor(m => m.RegEmail)
+				@Html.TextBoxFor(m => m.RegEmail, new { @class = "form-control", placeholder = "Email Address" })
+
+				@Html.LabelFor(m => m.UserName)
+				@Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "UserName" })
+				@Html.LabelFor(m => m.Password)
+				@Html.TextBoxFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+				@Html.LabelFor(m => m.ConfirmPassword)
+				@Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+
+			</fieldset><br />
+			<div class="">
+				<input class="regButt" type="submit" value="Register" />&nbsp;&nbsp;
+				<input class="regButt" type="reset" value="Reset Form" />
+			</div>
+		</form>
+	</section>
+
+
+	<!--div class="card regcard">
+		<br />
+		<div class="card-body">
+			<form method="post" asp-action="register" asp-controller="account">
+				<label>Username</label>
+				<input type="text" name="username" required class="form-control" placeholder="Username" /><br />
+				<label>Password</label>
+				<input type="password" name="password" required class="form-control" placeholder="Password" /><br />
+				<input class="regButt" type="submit" value="Register" />
+			</form>
+		</div>
+		<br />
+	</!--div>
+	<br /-->
+</main>
+

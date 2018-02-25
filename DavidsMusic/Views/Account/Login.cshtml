@@ -1,0 +1,24 @@
+﻿@{
+	ViewData["Title"] = "Login";
+}
+<main class="regpage">
+	<section class="bg-dark p-0 m-0">
+		<header class="pages">@ViewData["Title"]</header>
+	</section>
+	<div asp-validation-summary="All"></div>
+	<div class="card regcard">
+		<br />
+		<div class="card-body">
+			<form method="post" asp-action="register" asp-controller="account">
+				<label>Username</label>
+				<input type="text" name="username" required class="form-control" placeholder="Username" /><br />
+				<label>Password</label>
+				<input type="password" name="password" required class="form-control" placeholder="Password" /><br />
+				<input class="regButt" type="submit" value="Loging" />
+			</form>
+		</div>
+		<br />
+	</div>
+	<br />
+</main>
+
