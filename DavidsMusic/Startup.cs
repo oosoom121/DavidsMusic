@@ -48,19 +48,19 @@ namespace DavidsMusic
 			//opt.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DavidTest;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
 			//, sqlOptions => sqlOptions.MigrationsAssembly(this.GetType().Assembly.FullName))
 			//	);
-			services.AddDbContext<IdentityDbContext>(opt =>
-								opt.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DavidTest;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
-				, sqlOptions => sqlOptions.MigrationsAssembly(this.GetType().Assembly.FullName))
-				);
-			
-			services.AddIdentity<IdentityUser, IdentityRole>(options =>
+		//  services.AddDbContext<Models.DavidTestContext>(opt =>
+		//  					opt.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DavidTest;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+		//  	, sqlOptions => sqlOptions.MigrationsAssembly(this.GetType().Assembly.FullName))
+		//  	);
+		//  
+			services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 			{
 				options.Password.RequireDigit = false;
 				options.Password.RequiredLength = 5;
 				options.Password.RequireNonAlphanumeric = false;
 				options.Password.RequireUppercase = false;
 			})
-				.AddEntityFrameworkStores<IdentityDbContext>()
+				.AddEntityFrameworkStores<Models.DavidTestContext>()
 				.AddDefaultTokenProviders();
 		}
 

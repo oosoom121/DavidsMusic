@@ -1,12 +1,13 @@
-﻿@model DavidsMusic.Models.ProductsViewModel
+﻿@model DavidsMusic.Models.Products
 @{
 	ViewData["Title"] = "Products Page";
 }
 
-<header class="pages">Your store items here</header>
-<h3></h3>
+<section class="bg-dark p-0 m-0">
+	<header class="pages">@ViewData["Title"]</header>
+</section>
 
-<div class="row">
+<div class="row mutedbackground p-0 m-0">
 	<div class="col-4">
 
 		<img src="@Model.ImageUrl" alt="@Model.Brand" class="img-fluid" />
@@ -17,10 +18,12 @@
 			<dd>@Model.Brand  (item number: @Model.StockNumber)</dd>
 			<dt>Description</dt>
 			<dd>@Model.Description</dd>
+			<dt>Cost</dt>
+			<dd>@Model.UnitPrice.ToString("c")</dd>
 		</dl>
 		<form asp-action="index" asp-controller="products" method="post">
 			<input type="hidden" name="id" value="@Model.Brand" />
-			<input type="submit" value="Gimme My Stuff!" />
+			<input type="submit" value="Add to Cart" />
 		</form>
 
 	</div>

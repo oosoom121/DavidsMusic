@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using DavidsMusic.Models;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,9 +12,9 @@ namespace DavidsMusic.Controllers
 {
     public class AccountController : Controller
     {
-		private SignInManager<IdentityUser> _signInManager;
+		private SignInManager<ApplicationUser> _signInManager;
 
-		public AccountController(SignInManager<IdentityUser> signInManager)
+		public AccountController(SignInManager<ApplicationUser> signInManager)
 		{
 			this._signInManager = signInManager;
 		}
@@ -44,7 +45,7 @@ namespace DavidsMusic.Controllers
 			if (ModelState.IsValid)
 			{
 				//Do something with SignInManager here
-				IdentityUser newUser = new IdentityUser(username);
+				ApplicationUser newUser = new ApplicationUser(username);
 				
 				var userResult = _signInManager.UserManager.CreateAsync(newUser).Result;
 				if (userResult.Succeeded)
@@ -88,7 +89,7 @@ namespace DavidsMusic.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				IdentityUser existingUser = _signInManager.UserManager.FindByNameAsync(username).Result; // Identify user by username
+				ApplicationUser existingUser = _signInManager.UserManager.FindByNameAsync(username).Result; // Identify user by username
 				if (existingUser != null)
 				{
 					// If username exists, validate password
