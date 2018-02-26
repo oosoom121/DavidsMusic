@@ -48,10 +48,10 @@ namespace DavidsMusic
 			//opt.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DavidTest;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
 			//, sqlOptions => sqlOptions.MigrationsAssembly(this.GetType().Assembly.FullName))
 			//	);
-		//  services.AddDbContext<Models.DavidTestContext>(opt =>
-		//  					opt.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DavidTest;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
-		//  	, sqlOptions => sqlOptions.MigrationsAssembly(this.GetType().Assembly.FullName))
-		//  	);
+		  services.AddDbContext<Models.DavidTestContext>(opt =>
+		  					opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")
+		  	, sqlOptions => sqlOptions.MigrationsAssembly(this.GetType().Assembly.FullName))
+		  	);
 		//  
 			services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 			{
@@ -64,8 +64,8 @@ namespace DavidsMusic
 				.AddDefaultTokenProviders();
 		}
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, DavidTestContext context)
         {
             if (env.IsDevelopment())
             {
@@ -87,6 +87,8 @@ namespace DavidsMusic
                     name: "default",
                     template: "{controller=Home}/{action=Index}");
             });
+
+			DbInitializer.Initialize(context);
         }
     }
 }
