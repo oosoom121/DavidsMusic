@@ -62,6 +62,8 @@ namespace DavidsMusic.Controllers
 			//				connection.Close();
 			//			}
 
+
+
 			var product = _context.Products.Find(ID);
 			return View(product);
 		}
