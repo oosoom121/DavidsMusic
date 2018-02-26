@@ -43,6 +43,15 @@ namespace DavidsMusic
 					ImageUrl = "/images/LP-1.png",
 					UnitPrice = 549.99M
 				});
+				context.Products.Add(new Products
+				{
+					Brand = "Yamaha",
+					Type = "Piano",
+					StockNumber = 23456,
+					Description = "Yamaha accoustic upright piano.",
+					ImageUrl = "/images/yampiano.jpg",
+					UnitPrice = 1549.99M
+				});
 				context.SaveChanges();
 			}
 
