@@ -8,6 +8,8 @@ namespace DavidsMusic
 {
 	internal class DbInitializer
 	{
+
+
 		internal static void Initialize(DavidTestContext context)
 		{
 			context.Database.EnsureCreated();
