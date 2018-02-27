@@ -6,7 +6,6 @@ namespace DavidsMusic.Models
 {
 	public partial class DavidTestContext : Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext<ApplicationUser>
 	{
-
 		public DavidTestContext() : base()
 		{
 
@@ -23,16 +22,6 @@ namespace DavidsMusic.Models
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<ProductsCategories> ProductsCategories { get; set; }
         public virtual DbSet<ProductType> ProductType { get; set; }
-
-        // Unable to generate entity type for table 'dbo.RegisteredCustomers'. Please see the warning messages.
-
-   //     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-   //     {
-   //         if (!optionsBuilder.IsConfigured)
-   //         {
-   //             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DavidTest;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-   //         }
-   //     }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

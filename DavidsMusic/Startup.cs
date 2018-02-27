@@ -13,8 +13,8 @@ using DavidsMusic.Models;
 
 namespace DavidsMusic
 {
-    public class Startup
-    {
+	public class Startup
+	{
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
@@ -26,12 +26,11 @@ namespace DavidsMusic
 			_connectionStrings = connectionStrings.Value;
 		}
 
-
 		public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
+		// This method gets called by the runtime. Use this method to add services to the container.
+		public void ConfigureServices(IServiceCollection services)
+		{
 			System.Data.Common.DbConnectionStringBuilder builder =
 				new System.Data.Common.DbConnectionStringBuilder();
 
@@ -43,16 +42,11 @@ namespace DavidsMusic
 			services.Configure<Models.ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
 			services.AddOptions();
 
-			//services.AddDbContext<IdentityDbContext>(opt =>
-			////opt.UseInMemoryDatabase("Identities"));
-			//opt.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DavidTest;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
-			//, sqlOptions => sqlOptions.MigrationsAssembly(this.GetType().Assembly.FullName))
-			//	);
-		  services.AddDbContext<Models.DavidTestContext>(opt =>
-		  					opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")
-		  	, sqlOptions => sqlOptions.MigrationsAssembly(this.GetType().Assembly.FullName))
-		  	);
-		//  
+			services.AddDbContext<Models.DavidTestContext>(opt =>
+								opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")
+				, sqlOptions => sqlOptions.MigrationsAssembly(this.GetType().Assembly.FullName))
+				);
+			//  
 			services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 			{
 				options.Password.RequireDigit = false;
@@ -66,29 +60,29 @@ namespace DavidsMusic
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, DavidTestContext context)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseBrowserLink(); // auto updates browser when changes are made
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+		{
+			if (env.IsDevelopment())
+			{
+				app.UseBrowserLink(); // auto updates browser when changes are made
+				app.UseDeveloperExceptionPage();
+			}
+			else
+			{
+				app.UseExceptionHandler("/Home/Error");
+			}
 
 			app.UseSession();
 			app.UseStaticFiles();
 			app.UseAuthentication();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}");
-            });
+			app.UseMvc(routes =>
+			{
+				routes.MapRoute(
+					name: "default",
+					template: "{controller=Home}/{action=Index}");
+			});
 
 			DbInitializer.Initialize(context);
-        }
-    }
+		}
+	}
 }

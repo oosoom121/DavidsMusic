@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using DavidsMusic.Models;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace DavidsMusic.Controllers
 {
@@ -25,58 +19,7 @@ namespace DavidsMusic.Controllers
         {
 			return Content("You can only see this if you're logged in");
         }
-/*
- * // *******  REGISTER
-		public IActionResult Register()
-		{
-			return View();
-		}
 
-		public IActionResult Logout()
-		{		
-			_signInManager.SignOutAsync().Wait();
-			return RedirectToAction("Index", "Home");
-		}
-		
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public IActionResult Register(string username, string password)
-		{
-			if (ModelState.IsValid)
-			{
-				//Do something with SignInManager here
-				ApplicationUser newUser = new ApplicationUser(username);
-				
-				var userResult = _signInManager.UserManager.CreateAsync(newUser).Result;
-				if (userResult.Succeeded)
-				{
-					var passwordResult = _signInManager.UserManager.AddPasswordAsync(newUser, password).Result;
-					if (passwordResult.Succeeded)
-					{
-						_signInManager.SignInAsync(newUser, false).Wait();
-						return RedirectToAction("Index", "Home");
-					}
-					else
-					{
-						foreach (var error in passwordResult.Errors)
-						{
-							ModelState.AddModelError(error.Code, error.Description);
-						}
-						_signInManager.UserManager.DeleteAsync(newUser).Wait();
-					}
-				}
-				else
-				{
-					foreach (var error in userResult.Errors)
-					{
-						ModelState.AddModelError(error.Code, error.Description);
-					}
-					_signInManager.UserManager.DeleteAsync(newUser).Wait();
-				}
-			}
-			return View();
-		}
-*/
 //  *********  LOGIN
 		public IActionResult Login()
 		{
