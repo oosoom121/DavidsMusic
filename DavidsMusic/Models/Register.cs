@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace DavidsMusic.Models
 {
-    public class RegisterModel
+    public class Register
     {
 		public int ID { get; set; }
 		[Required(ErrorMessage = "First name is required.")]
@@ -16,24 +16,21 @@ namespace DavidsMusic.Models
 		[Required(ErrorMessage = "Last name is required.")]
 		[Display(Name = "Last Name")]
 		public string RegLastName { get; set; }
-		[Required(ErrorMessage = "Address is required.")]
 		[Display(Name = "Address")]
 		public string RegAddress1 { get; set; }
 		[Display(Name = "Address 2")]
 		public string RegAddress2 { get; set; }
-		[Required(ErrorMessage = "City is required.")]
 		[Display(Name = "City")]
 		public string RegCity { get; set; }
-		[Required]
 		[Display(Name = "State")]
 		public string RegState { get; set; }
-		[Required(ErrorMessage = "Postal code is required.")]
 		[Display(Name = "Postal Code")]
 		public string RegPostal { get; set; }
 		[Display(Name = "Home Phone")]
 		public string RegHomePhone { get; set; }
 		[Display(Name = "Cell Phone")]
 		public string RegCellPhone { get; set; }
+		[Required(ErrorMessage = "An Email Address is required.")]
 		[Display(Name = "Email Address")]
 		public string RegEmail { get; set; }
 		[Required(ErrorMessage = "Username is required.")]
@@ -48,3 +45,4 @@ namespace DavidsMusic.Models
 
 	}
 }
+

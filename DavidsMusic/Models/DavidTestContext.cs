@@ -22,6 +22,7 @@ namespace DavidsMusic.Models
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<ProductsCategories> ProductsCategories { get; set; }
         public virtual DbSet<ProductType> ProductType { get; set; }
+		public virtual DbSet<Register> Register { get; set; }
 
 		public virtual DbSet<Review> Reviews { get; set; }
 		public virtual DbSet<Order> Orders { get; set; }

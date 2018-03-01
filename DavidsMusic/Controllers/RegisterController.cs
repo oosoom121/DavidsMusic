@@ -40,7 +40,7 @@ namespace DavidsMusic.Controllers
 					"Washington","Wisconsin", "West Virginia", "Wyoming"
 			};
 
-			RegisterModel regmodel = new RegisterModel();
+			Register regmodel = new Register();
 			regmodel.RegFirstName = HttpContext.Request.Form["RegFirstName"].ToString();
 			regmodel.RegLastName = HttpContext.Request.Form["RegLastName"].ToString();
 			regmodel.RegAddress1 = HttpContext.Request.Form["RegAddress1"].ToString();
@@ -57,14 +57,14 @@ namespace DavidsMusic.Controllers
 
 			using (var connection = new System.Data.SqlClient.SqlConnection(_connectionStrings.DefaultConnection))
 			{
-				string query = "INSERT INTO dbo.RegisteredCustomers(FirstName, LastName, Address1, Address2, City, State, PostalCode, HomePhone , CellPhone, EmailAddress, Username, UserPassword, ConfirmPassword) values ('" + regmodel.RegFirstName + "','" + regmodel.RegLastName + "','" + regmodel.RegAddress1 + "','" + regmodel.RegAddress2 + "','" + regmodel.RegCity + "','" + regmodel.RegState + "','" + regmodel.RegPostal + "','" + regmodel.RegHomePhone + "','" + regmodel.RegCellPhone + "','" + regmodel.RegEmail + "','" + regmodel.UserName + "','" + regmodel.Password + "','" + regmodel.ConfirmPassword + "')";
+				string query = "INSERT INTO dbo.Register(RegFirstName, RegLastName, RegAddress1, RegAddress2, RegCity, RegState, RegPostal, RegHomePhone , RegCellPhone, RegEmail, Username, Password, ConfirmPassword) values ('" + regmodel.RegFirstName + "','" + regmodel.RegLastName + "','" + regmodel.RegAddress1 + "','" + regmodel.RegAddress2 + "','" + regmodel.RegCity + "','" + regmodel.RegState + "','" + regmodel.RegPostal + "','" + regmodel.RegHomePhone + "','" + regmodel.RegCellPhone + "','" + regmodel.RegEmail + "','" + regmodel.UserName + "','" + regmodel.Password + "','" + regmodel.ConfirmPassword + "')";
 				SqlCommand cmd = new SqlCommand(query, connection); 
 				connection.Open();
 				int i = cmd.ExecuteNonQuery();
 				connection.Close();
 				result = i;
 			}
-
+		
 			if (result > 0)
 			{
 				ViewBag.Result = "Data Saved Successfully";
