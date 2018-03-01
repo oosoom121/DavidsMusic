@@ -15,6 +15,7 @@
 			  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
 		<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 	</environment>
+	@RenderSection("AdditionalHead", required:false)
 </head>
 <body>
 	<div class="container">
@@ -42,15 +43,16 @@
 					<li class="nav-item">
 						<a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a>
 					</li>
-					<li class="nav-item">
-						<a asp-area="" asp-controller="Products" asp-action="Index" class="nav-link">Products</a>
-					</li>
+				<!--	<li class="nav-item">
+						<a asp-area="" asp-controller="Products" asp-action="Index" class="nav-link">Products</a>  
+					</li>  -->
 					<li class="nav-item">
 						<a asp-area="" asp-controller="Checkout" asp-action="Index" class="nav-link">Checkout</a>
 					</li>
 					<li class="nav-item">
 						<a asp-area="" asp-controller="Account" asp-action="Login" class="nav-link">Login</a>
 					</li>
+					
 
 					@if (User.Identity.IsAuthenticated)
 					{

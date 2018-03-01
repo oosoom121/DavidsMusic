@@ -1,4 +1,5 @@
 ﻿using DavidsMusic.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,9 @@ namespace DavidsMusic
 {
 	internal class DbInitializer
 	{
-
-
 		internal static void Initialize(DavidTestContext context)
 		{
-			context.Database.EnsureCreated();
+			context.Database.Migrate();
 
 			if (!context.Categories.Any())
 			{
@@ -40,11 +39,45 @@ namespace DavidsMusic
 				{
 					Brand = "Gibson",
 					Type = "Guitar",
-					StockNumber = 12345,
-					Description = "Fireburst Les Paul Standard.",
-					ImageUrl = "/images/LP-1.png",
-					UnitPrice = 549.99M
+					StockNumber = 12340,
+					Description = "Gibson Les Paul\nGibson Les Paul Electric guitar.",
+					ImageUrl = "/images/LP-2.png",
+					UnitPrice = 1089.00M,
+				//	Category = context.Categories.First(x => x.Name == "Instruiments")
 				});
+				context.Products.Add(new Products
+				{
+					Brand = "Gibson",
+					Type = "Guitar",
+					StockNumber = 12341,
+					Description = "Gibson Les Paul\nGibson VOS '57Les Paul Goldtop (Reissue).",
+					ImageUrl = "/images/LP-3.png",
+					UnitPrice = 3255.00M,
+				//	Category = context.Categories.First(x => x.Name == "Instruiments")
+
+				});
+				context.Products.Add(new Products
+				{
+					Brand = "Gibson",
+					Type = "Guitar",
+					StockNumber = 12342,
+					Description = "Gibson Les Paul\nGibson-Historic-’59-Les-Paul-Reissue-VOS.",
+					ImageUrl = "/images/LP-4.png",
+					UnitPrice = 3025.00M,
+				//	Category = context.Categories.First(x => x.Name == "Instruiments")
+				});
+
+				context.Products.Add(new Products
+				{
+					Brand = "Gibson",
+					Type = "Guitar",
+					StockNumber = 12343,
+					Description = "Gibson Les Paul\nGibson Custom 1959 Les Paul Standard Reissue.",
+					ImageUrl = "/images/LP-5.png",
+					UnitPrice = 2855.00M,
+				//	Category = context.Categories.First(x => x.Name == "Instruiments")
+				});
+
 				context.Products.Add(new Products
 				{
 					Brand = "Yamaha",
@@ -52,11 +85,32 @@ namespace DavidsMusic
 					StockNumber = 23456,
 					Description = "Yamaha accoustic upright piano.",
 					ImageUrl = "/images/yampiano.jpg",
-					UnitPrice = 1549.99M
+					UnitPrice = 1549.99M,
+				//	Category = context.Categories.First(x => x.Name == "Instruiments")
 				});
 				context.SaveChanges();
 			}
 
+			if (!context.Reviews.Any())
+			{
+				context.Reviews.Add(new Review
+				{
+					Rating = 5,
+					Body = "Best guitar I've ever had!",
+					IsApproved = true,
+					Product = context.Products.First()
+
+				});
+				context.Reviews.Add(new Review
+				{
+					Rating = 3,
+					Body = "Not bad but I've played better.",
+					IsApproved = true,
+					Product = context.Products.First()
+
+				});
+				context.SaveChanges();
+			}
 		}
 	}
 }

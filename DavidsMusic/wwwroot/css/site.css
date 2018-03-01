@@ -16,7 +16,7 @@ body {
 }
 
 /* Checkout Page */
-.checkoutForm {
+.formatForm {
 	display: flex;
 	float: left;
 	width: 70%;
@@ -29,8 +29,8 @@ body {
 }
 
 .checkoutSidebar {
-	width:25%;
-	height:440px;
+	width:30%;
+	height:458px;
 	border-radius: 25px;
 	background-color:lightgray;
 
@@ -53,7 +53,7 @@ form {
 }
 
 .mutedbackground {
-	background-color: rgba(224, 224, 224, 0.5);
+	background-color: rgba(224, 224, 224, 0.7);
 }
 .pages {
 	background: linear-gradient(0deg, #343A47, silver 20%, #343A47 65%);
@@ -66,12 +66,23 @@ form {
 	border-radius: 1.2em;
 }
 
+a.card-link {
+	color: #000000;
+}
+.reviewPain {
+	background-color: greenyellow;
+}
+
+.homeRule {
+	background-color: white; 
+	color:white;height:0.3em;
+}
 
 .regButt {
 	background: linear-gradient(0deg, #343A47, silver 20%, #343A47 65%);
 	color: cornsilk;
 }
-/*
+
 .regcard {
 	display:block;
 	width:30%;
@@ -83,7 +94,7 @@ form {
 	margin:0 auto;
 	background-color:lightgray;
 }
-
+/*
 .regpage {
 	border-top-left-radius: 7%;
 	border-top-right-radius: 7%;

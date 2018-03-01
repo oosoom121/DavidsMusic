@@ -14,10 +14,13 @@
 			@Html.ValidationSummary(false)
 		</div>
 	}
+	<!--
 
-	<section class="regForm mutedbackground m-auto">
+	-->
+
+	<section class="formatForm regForm mutedbackground">
 		<!---form method="post" asp-action="register" asp-controller="account"-->
-		<form id="bootstrap-overrides" method="post" action="RegCustDetails">
+		<form class="" id="bootstrap-overrides" method="post" action="RegCustDetails">
 			@Html.AntiForgeryToken()
 			<fieldset>
 				<legend>Registration Information</legend>
@@ -64,11 +67,12 @@
 				@Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
 
 			</fieldset><br />
-			<div class="">
+			<div class="mb-3">
 				<input class="regButt" type="submit" value="Register" />&nbsp;&nbsp;
 				<input class="regButt" type="reset" value="Reset Form" />
 			</div>
 		</form>
 	</section>
+	<div class="checkoutSidebar ml-auto"></div>
 </main>
 

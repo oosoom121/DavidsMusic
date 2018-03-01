@@ -10,12 +10,22 @@ namespace DavidsMusic.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
 
-        public IActionResult About()
+		private DavidTestContext _context;
+
+		//	private Models.ConnectionStrings _connectionStrings;
+		public HomeController(DavidTestContext context)
+		{
+			_context = context;
+			//_connectionStrings = connectionStrings.Value;
+		}
+		public IActionResult Index()
+        {
+			//return View(_context.Products.Take(4));
+			return View(_context.Products);
+		}
+
+		public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
 

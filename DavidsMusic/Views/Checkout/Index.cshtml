@@ -1,12 +1,11 @@
 ﻿@model DavidsMusic.Models.CheckoutModel
 
-
-@{
-	ViewData["Title"] = "Checkout Page";
-}
-<section class="bg-dark p-0 m-0">
-	<header class="pages">@ViewData["Title"]</header>
-</section>
+	@{
+		ViewData["Title"] = "Checkout";
+	}
+	<section class="bg-dark p-0 m-0">
+		<header class="pages">@ViewData["Title"]</header>
+	</section>
 
 
 	@if (!this.ViewContext.ModelState.IsValid)
@@ -15,46 +14,48 @@
 			@Html.ValidationSummary(false)
 		</div>
 	}
-			<section class="checkoutForm mutedbackground">
-				<form id="bootstrap-overrides" method="post" action="">
-					@Html.AntiForgeryToken()
-					<fieldset>
-						<legend>Personal Profile Information</legend>
-						@Html.LabelFor(m => m.CustomerFirstName)
-						@Html.TextBoxFor(m => m.CustomerFirstName, new { @class = "form-control", placeholder = "First Name" })
-						@Html.LabelFor(m => m.CustomerLastName)
-						@Html.TextBoxFor(m => m.CustomerLastName, new { @class = "form-control", placeholder = "Last Name" })
-						@Html.LabelFor(m => m.CustomerAddress1)
-						@Html.TextBoxFor(m => m.CustomerAddress1, new { @class = "form-control", placeholder = "Address 1" })
-						@Html.LabelFor(m => m.CustomerAddress2)
-						@Html.TextBoxFor(m => m.CustomerAddress2, new { @class = "form-control", placeholder = "Address 2" })
+	<section class="formatForm mutedbackground">
+		<form class="pl-5" id="bootstrap-overrides" method="post" action="">
+			@Html.AntiForgeryToken()
+			<fieldset>
+				<legend>Personal Profile Information</legend>
+				@Html.LabelFor(m => m.CustomerFirstName)
+				@Html.TextBoxFor(m => m.CustomerFirstName, new { @class = "form-control", placeholder = "First Name" })
+				@Html.LabelFor(m => m.CustomerLastName)
+				@Html.TextBoxFor(m => m.CustomerLastName, new { @class = "form-control", placeholder = "Last Name" })
+				@Html.LabelFor(m => m.CustomerAddress1)
+				@Html.TextBoxFor(m => m.CustomerAddress1, new { @class = "form-control", placeholder = "Address 1" })
+				@Html.LabelFor(m => m.CustomerAddress2)
+				@Html.TextBoxFor(m => m.CustomerAddress2, new { @class = "form-control", placeholder = "Address 2" })
 
 
-						<div class="col-5 d-inline-flex m-0 p-0">
-							@Html.LabelFor(m => m.CustomerCity)
-						</div>
-						<div class="col-4 d-inline-flex m-0 p-0">
-							@Html.LabelFor(m => m.State)
-						</div>
-						<div class="col-2 d-inline-flex  m-0 p-0">
-							@Html.LabelFor(m => m.CustomerPostal)
-						</div>
+				<div class="col-5 d-inline-flex m-0 p-0">
+					@Html.LabelFor(m => m.CustomerCity)
+				</div>
+				<div class="col-4 d-inline-flex m-0 p-0">
+					@Html.LabelFor(m => m.State)
+				</div>
+				<div class="col-2 d-inline-flex  m-0 p-0">
+					@Html.LabelFor(m => m.CustomerPostal)
+				</div>
 
-						<div class="col-5 d-inline-flex form-group mt-0 p-0">
-							@Html.TextBoxFor(m => m.CustomerCity, new { @class = (ViewData.ModelState.ContainsKey("CustomerCity") && ViewData.ModelState.FirstOrDefault(x => x.Key == "CustomerCity").Value.ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid ? "form-control is-invalid" : "form-control") })
-							<span asp-validation-for="CustomerCity" class="invalid-feedback"></span>
-						</div>
-						<div class="col-4 d-inline-flex form-group mt-0 p-0">
-							@Html.DropDownListFor(m => m.State, ((string[])ViewData["States"]).Select(x => new SelectListItem { Text = x, Value = x }), new { @class = "form-control" })
+				<div class="col-5 d-inline-flex form-group mt-0 p-0">
+					@Html.TextBoxFor(m => m.CustomerCity, new { @class = (ViewData.ModelState.ContainsKey("CustomerCity") && ViewData.ModelState.FirstOrDefault(x => x.Key == "CustomerCity").Value.ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid ? "form-control is-invalid" : "form-control") })
+					<span asp-validation-for="CustomerCity" class="invalid-feedback"></span>
+				</div>
+				<div class="col-4 d-inline-flex form-group mt-0 p-0">
+					@Html.DropDownListFor(m => m.State, ((string[])ViewData["States"]).Select(x => new SelectListItem { Text = x, Value = x }), new { @class = "form-control" })
 
-						</div>
-						<div class="col-2 d-inline-flex form-group mt-0 p-0">
-							@Html.TextBoxFor(m => m.CustomerPostal, new { @class = "form-control", placeholder = "Postal Code" })
-						</div>
+				</div>
+				<div class="col-2 d-inline-flex form-group mt-0 p-0">
+					@Html.TextBoxFor(m => m.CustomerPostal, new { @class = "form-control", placeholder = "Postal Code" })
+				</div>
 
-					</fieldset>
-					<input type="submit" value="Submit Information" />&nbsp;&nbsp;
-					<input type="reset" value="Reset Form" />
-				</form>
-			</section>
-				<div class="checkoutSidebar"></div>
+			</fieldset>
+			<div class="pb-3 ml-5">
+				<input type="submit" value="Submit Information" />&nbsp;&nbsp;
+				<input type="reset" value="Reset Form" />
+			</div>
+		</form>
+	</section>
+	<div class="checkoutSidebar ml-auto"></div>

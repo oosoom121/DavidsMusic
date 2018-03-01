@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DavidsMusic.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DavidsMusic.Controllers
 {		
@@ -20,15 +21,18 @@ namespace DavidsMusic.Controllers
 			//_connectionStrings = connectionStrings.Value;
 		}
 
-		// GET: /<controller>/
-		[HttpGet]
-		public IActionResult Index(int? ID)
+//		[HttpGet]
+		public IActionResult Index(int? ID=1)
 		{
 			Models.ProductsViewModel model = new Models.ProductsViewModel();
 			System.Data.Common.DbConnectionStringBuilder builder =
 				new System.Data.Common.DbConnectionStringBuilder();
 
-			var product = _context.Products.Find(ID);
+			//var product = _context.Products.Find(ID);
+
+			//var product = _context.Products.Include(x => x.Reviews).Single(x => x.Id == ID);
+			var product = _context.Products.AsNoTracking().Include(x => x.Reviews).Single(x => x.Id == ID); // Adding "ASNoTracking will not lock the table.  
+																											// Use this for fetching data when you don't need to make changes.
 			return View(product);
 		}
 
@@ -38,7 +42,21 @@ namespace DavidsMusic.Controllers
 			string cartId;
 			if (!Request.Cookies.ContainsKey("cartId"))
 			{
-				cartId = Guid.NewGuid().ToString();
+				var product = _context.Products.Find(id);
+				Order o = new Order();
+				LineItem l = new LineItem();
+				l.Quantity = 1;
+				l.Product = product;
+				o.LineItems.Add(l);
+				o.SubmittedDate = DateTime.UtcNow;
+				o.SubTotal = product.UnitPrice;
+				o.TasTotal = o.SubTotal * 0.1m;
+				o.ShippingTotal = 10m;
+				o.TrackingNumber = Guid.NewGuid();
+
+				_context.Orders.Add(o);
+				_context.SaveChanges();
+				cartId = o.TrackingNumber.ToString();
 
 				//Cookies: useful for saving small pieces of non-sensitive data for a long period of time
 				Response.Cookies.Append("cartId", cartId, new Microsoft.AspNetCore.Http.CookieOptions { Expires = DateTime.Now.AddYears(1) });

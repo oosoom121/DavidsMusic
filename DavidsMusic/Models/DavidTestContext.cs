@@ -23,8 +23,19 @@ namespace DavidsMusic.Models
         public virtual DbSet<ProductsCategories> ProductsCategories { get; set; }
         public virtual DbSet<ProductType> ProductType { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		public virtual DbSet<Review> Reviews { get; set; }
+		public virtual DbSet<Order> Orders { get; set; }
+		
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+			modelBuilder.Entity<Order>().HasKey(o => o.OrderID);
+			modelBuilder.Entity<Order>().Property(prop => prop.OrderID).ValueGeneratedOnAdd();
+			modelBuilder.Entity<Order>().Property(prop => prop.TrackingNumber).ValueGeneratedOnAdd();
+			modelBuilder.Entity<Order>().HasMany(o => o.LineItems).WithOne(l => l.Order).IsRequired();
+			modelBuilder.Entity<LineItem>().HasOne(l => l.Order).WithMany(o => o.LineItems);
+			modelBuilder.Entity<LineItem>().HasOne(l => l.Product).WithMany(o => o.LineItems);
+
 			base.OnModelCreating(modelBuilder);
 
 			modelBuilder.Entity<Brand>(entity =>

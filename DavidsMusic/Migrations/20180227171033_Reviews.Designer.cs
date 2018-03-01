@@ -11,9 +11,10 @@ using System;
 namespace DavidsMusic.Migrations
 {
     [DbContext(typeof(DavidTestContext))]
-    partial class DavidTestContextModelSnapshot : ModelSnapshot
+    [Migration("20180227171033_Reviews")]
+    partial class Reviews
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,52 +155,6 @@ namespace DavidsMusic.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("DavidsMusic.Models.LineItem", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("OrderID")
-                        .IsRequired();
-
-                    b.Property<int?>("ProductId");
-
-                    b.Property<int>("Quantity");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("OrderID");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("LineItem");
-                });
-
-            modelBuilder.Entity("DavidsMusic.Models.Order", b =>
-                {
-                    b.Property<int>("OrderID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<decimal>("ShippingTotal");
-
-                    b.Property<decimal>("SubTotal");
-
-                    b.Property<DateTime>("SubmittedDate");
-
-                    b.Property<decimal>("TasTotal");
-
-                    b.Property<Guid>("TrackingNumber")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("OrderID");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("DavidsMusic.Models.Products", b =>
@@ -424,25 +379,6 @@ namespace DavidsMusic.Migrations
                         .WithMany("Cart")
                         .HasForeignKey("ProductId")
                         .HasConstraintName("FK_CartProduct_Product");
-                });
-
-            modelBuilder.Entity("DavidsMusic.Models.LineItem", b =>
-                {
-                    b.HasOne("DavidsMusic.Models.Order", "Order")
-                        .WithMany("LineItems")
-                        .HasForeignKey("OrderID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DavidsMusic.Models.Products", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
-                });
-
-            modelBuilder.Entity("DavidsMusic.Models.Order", b =>
-                {
-                    b.HasOne("DavidsMusic.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("DavidsMusic.Models.Products", b =>

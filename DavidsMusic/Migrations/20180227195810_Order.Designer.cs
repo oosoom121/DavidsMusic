@@ -11,9 +11,10 @@ using System;
 namespace DavidsMusic.Migrations
 {
     [DbContext(typeof(DavidTestContext))]
-    partial class DavidTestContextModelSnapshot : ModelSnapshot
+    [Migration("20180227195810_Order")]
+    partial class Order
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

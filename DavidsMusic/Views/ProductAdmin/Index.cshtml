@@ -1,0 +1,79 @@
+﻿@model IEnumerable<DavidsMusic.Models.Products>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<main class="mutedbackground">
+	<h2>Products</h2>
+
+	<p>
+		<a asp-action="Create">Create New</a>
+	</p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.StockNumber)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Type)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Brand)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Description)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.UnitPrice)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.ImageUrl)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.DateCreated)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.DateLastModified)
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.StockNumber)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Type)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Brand)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Description)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.UnitPrice)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.ImageUrl)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.DateCreated)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.DateLastModified)
+					</td>
+					<td>
+						<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+						<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+						<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</main>

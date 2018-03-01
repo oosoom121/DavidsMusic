@@ -7,8 +7,10 @@ namespace DavidsMusic.Models
     {
         public Products()
         {
+			Reviews = new HashSet<Review>();
             Cart = new HashSet<Cart>();
             ProductsCategories = new HashSet<ProductsCategories>();
+			LineItems = new HashSet<LineItem>();
         }
 
         public int Id { get; set; }
@@ -21,7 +23,13 @@ namespace DavidsMusic.Models
         public DateTime? DateCreated { get; set; }
         public DateTime? DateLastModified { get; set; }
 
-        public ICollection<Cart> Cart { get; set; }
+		public Categories Category { get; set; }
+		public ICollection<Review> Reviews { get; set; }
+		public ICollection<LineItem> LineItems { get; set; }
+
+
+		public ICollection<Cart> Cart { get; set; }
         public ICollection<ProductsCategories> ProductsCategories { get; set; }
+
     }
 }
