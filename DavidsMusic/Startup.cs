@@ -17,6 +17,7 @@ namespace DavidsMusic
 	{
 		public Startup(IConfiguration configuration)
 		{
+		
 			Configuration = configuration;
 		}
 
@@ -56,6 +57,12 @@ namespace DavidsMusic
 			})
 				.AddEntityFrameworkStores<Models.DavidTestContext>()
 				.AddDefaultTokenProviders();
+
+
+			services.AddTransient<SendGrid.SendGridClient>((x) =>
+			{
+				return new SendGrid.SendGridClient(Configuration["sendgrid"]);
+			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -43,25 +43,27 @@
 					<li class="nav-item">
 						<a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a>
 					</li>
-				<!--	<li class="nav-item">
-						<a asp-area="" asp-controller="Products" asp-action="Index" class="nav-link">Products</a>  
-					</li>  -->
+					<!--	<li class="nav-item">
+			<a asp-area="" asp-controller="Products" asp-action="Index" class="nav-link">Products</a>
+		</li>  -->
 					<li class="nav-item">
 						<a asp-area="" asp-controller="Checkout" asp-action="Index" class="nav-link">Checkout</a>
 					</li>
-					<li class="nav-item">
-						<a asp-area="" asp-controller="Account" asp-action="Login" class="nav-link">Login</a>
-					</li>
-					
 
 					@if (User.Identity.IsAuthenticated)
-					{
-						<li class="nav-item"><a asp-area="" asp-controller="Account" asp-action="Logout" class="nav-link">Logout as @User.Identity.Name</a></li>
-					}
-					else
-					{
-						<li class="nav-item"><a asp-area="" asp-controller="Register" asp-action="Register" class="nav-link">Register</a></li>
-					}
+	{
+				<li class="nav-item"><a asp-area="" asp-controller="Account" asp-action="Logout" class="nav-link">Logout as @User.Identity.Name</a></li>
+}
+else
+{
+				<li class="nav-item"><a asp-area="" asp-controller="Account" asp-action="Login" class="nav-link">Login</a></li>
+				<li class="nav-item"><a asp-area="" asp-controller="Account" asp-action="Register" class="nav-link">Register</a></li>
+}
+
+
+
+
+
 				</ul>
 			</div>
 		</nav>
