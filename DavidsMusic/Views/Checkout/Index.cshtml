@@ -50,6 +50,41 @@
 				<div class="col-2 d-inline-flex form-group mt-0 p-0">
 					@Html.TextBoxFor(m => m.CustomerPostal, new { @class = "form-control", placeholder = "Postal Code" })
 				</div>
+				<div class="form-group">
+					<label for="creeditcardnumber">Credit Card Number</label>
+					<input type="text" name="creditcardnumber" class="form-control" required />
+				</div>
+				<div class="form-group">
+					<label for="creeditcardverificationvalue">CVV</label>
+					<input type="text" name="creeditcardverificationvalue" class="form-control" required />
+				</div>
+				<div class="form-group">
+					<label for="expirationmonth">Expiration Month</label>
+					<select type="text" name="expirationmonth" class="form-control" required>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="expirationyear">Expiration Month</label>
+					<select type="text" name="expirationyear" class="form-control" required>
+						<option value="2018">2018</option>
+						<option value="2019">2019</option>
+						<option value="2020">2020</option>
+						<option value="2021">2021</option>
+						<option value="2022">2022</option>
+					</select>
+				</div>
 
 			</fieldset>
 			<div class="pb-3 ml-5">
@@ -57,5 +92,6 @@
 				<input type="reset" value="Reset Form" />
 			</div>
 		</form>
+		<br />
 	</section>
 	<div class="checkoutSidebar ml-auto"></div>

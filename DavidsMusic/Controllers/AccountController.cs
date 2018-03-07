@@ -4,6 +4,8 @@ using System.Data.SqlClient;
 using DavidsMusic.Models;
 using System.Threading.Tasks;
 using SendGrid;
+using Microsoft.AspNetCore.Http.Extensions;
+using System;
 
 namespace DavidsMusic.Controllers
 {
@@ -47,7 +49,7 @@ namespace DavidsMusic.Controllers
 				{
 					// If username exists, validate password
 					if (await _signInManager.UserManager.CheckPasswordAsync(existingUser, password))
-					{
+					{	
 						await _signInManager.SignInAsync(existingUser, false);
 						return RedirectToAction("Index", "Home");
 					}
@@ -80,7 +82,8 @@ namespace DavidsMusic.Controllers
 			{
 				ApplicationUser registeredUser = new ApplicationUser();
 				registeredUser.UserName = username;
-				registeredUser.FirstName = "Joe";
+//				registeredUser.FirstName = "Joe";
+				registeredUser.Email = username;
 				var regResult = await _signInManager.UserManager.CreateAsync(registeredUser);
 
 				if (regResult.Succeeded)
@@ -94,19 +97,17 @@ namespace DavidsMusic.Controllers
 						message.Subject = "Welcome to Sharps and Trebles Music";
 						message.SetFrom("sandt@sharpsandtrebles.com");
 						message.AddContent("text/plain", "Thanks for registering as " + username + " on Sharps and Trebles Music!");
+						message.SetTemplateId("ca66df1c-5964-43ae-bc9f-9d4ed2db5bed");
 						await _sendGridClient.SendEmailAsync(message);
 
 						await _signInManager.SignInAsync(registeredUser, false);
 						return RedirectToAction("Index", "Home");
 					}
-					else
-					{
 						foreach (var Error in passwordResult.Errors)
 						{
 							ModelState.AddModelError(Error.Code, Error.Description);
 						}
 						await _signInManager.UserManager.DeleteAsync(registeredUser);
-					}
 				}
 				else
 				{
@@ -158,6 +159,63 @@ namespace DavidsMusic.Controllers
 		//	{
 		//		ViewBag.Result = "Something Went Wrong";
 		//	}
+			return View();
+		}
+
+		public IActionResult ForgotPassword()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> ForgotPassword(string email)
+		{
+			var user = await _signInManager.UserManager.FindByEmailAsync(email);
+			if (user != null)
+			{
+				string token = await _signInManager.UserManager.GeneratePasswordResetTokenAsync(user);
+				string passwordResetUrl = Request.GetDisplayUrl();
+				string currentUrl = Request.GetDisplayUrl();
+				Uri uri = new Uri(currentUrl);
+				string resetUrl = uri.GetLeftPart(UriPartial.Authority);
+				resetUrl += "/account/resetpassword?id=" + token + "&email=" + email;
+
+				SendGrid.Helpers.Mail.SendGridMessage message = new SendGrid.Helpers.Mail.SendGridMessage();
+				message.AddTo(email);
+				message.Subject = "Your password reset token.";
+				message.SetFrom("sandt@sharpsandtrebles.com");
+				message.AddContent("text/plain", resetUrl);
+				message.AddContent("text/html", string.Format("<a href=\"{0} \">{0}</a>", resetUrl));
+				await _sendGridClient.SendEmailAsync(message);
+			}
+			return RedirectToAction("ResetSent");
+		}
+
+		public IActionResult ResetPassword()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> ResetPassword(string id, string email, string password)
+		{
+			string originalToken = id;
+			var user = await _signInManager.UserManager.FindByEmailAsync(email);
+			if (user != null)
+			{
+				var result = await _signInManager.UserManager.ResetPasswordAsync(user, originalToken, password);
+				if (result.Succeeded)
+				{
+					return RedirectToAction("Login", new { resetSuccessful = true });
+				}
+				else
+				{
+					foreach (var error in result.Errors)
+					{
+						ModelState.AddModelError(error.Code, error.Description);
+					}		
+				}
+			}
 			return View();
 		}
 	}

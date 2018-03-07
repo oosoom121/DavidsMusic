@@ -10,6 +10,13 @@ namespace DavidsMusic.Controllers
 {
 	public class CheckoutController : Controller
 	{
+		private Braintree.BraintreeGateway _braintreeGateway;
+
+		public CheckoutController( Braintree.BraintreeGateway braintreeGateway)
+		{			
+            _braintreeGateway = braintreeGateway;
+		}
+
 		// GET: /<controller>/
 		public IActionResult Index()
 		{
