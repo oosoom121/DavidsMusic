@@ -1,0 +1,12 @@
+﻿@inject DavidTestContext context
+
+<li class="nav-item dropdown navbar-dark bg-dark">
+	<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
+	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		@foreach (var cat in context.Categories)
+		{
+			<a class="dropdown-item" asp-area="" asp-controller="Category" asp-action="Index" asp-route-id="@cat.Id">@cat.Name</a>
+		}
+	</div>
+</li>
+

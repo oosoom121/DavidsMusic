@@ -27,21 +27,21 @@
 			</dd>
 		</dl>
 		<form asp-action="index" asp-controller="products" method="post">
-			<input type="hidden" name="id" value="@Model.Brand" />
+			<input type="hidden" name="id" value="@Model.ID" />
 			<input type="submit" value="Add to Cart" />
 		</form>
 		<br />
 		<div class="reviewPain">
 			<h4>Reviews</h4>
-		@if (Model.Reviews != null && Model.Reviews.Any())
-		{
-			@foreach (var review in Model.Reviews)
+			@if (Model.Reviews != null && Model.Reviews.Any())
 			{
-				<blockquote>
-					@review.Body - @review.Rating
-				</blockquote>
+				@foreach (var review in Model.Reviews)
+				{
+					<blockquote>
+						@review.Body - @review.Rating
+					</blockquote>
+				}
 			}
-		}
 		</div>
 	</div>
 </div>

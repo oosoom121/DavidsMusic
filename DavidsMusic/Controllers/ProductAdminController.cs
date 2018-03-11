@@ -33,7 +33,7 @@ namespace DavidsMusic.Controllers
             }
 
             var products = await _context.Products
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .SingleOrDefaultAsync(m => m.ID == id);
             if (products == null)
             {
                 return NotFound();
@@ -48,14 +48,14 @@ namespace DavidsMusic.Controllers
             return View();
         }
 
-        // POST: Products1/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StockNumber,Type,Brand,Description,UnitPrice,ImageUrl,DateCreated,DateLastModified")] Products products)
-        {
-            if (ModelState.IsValid)
+		// POST: Products1/Create
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Create([Bind("Id,StockNumber,Type,Brand,Description,UnitPrice,ImageUrl,DateCreated,DateLastModified")] Products products)
+		{
+			if (ModelState.IsValid)
             {
                 _context.Add(products);
                 await _context.SaveChangesAsync();
@@ -72,7 +72,7 @@ namespace DavidsMusic.Controllers
                 return NotFound();
             }
 
-            var products = await _context.Products.SingleOrDefaultAsync(m => m.Id == id);
+            var products = await _context.Products.SingleOrDefaultAsync(m => m.ID == id);
             if (products == null)
             {
                 return NotFound();
@@ -87,7 +87,7 @@ namespace DavidsMusic.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,StockNumber,Type,Brand,Description,UnitPrice,ImageUrl,DateCreated,DateLastModified")] Products products)
         {
-            if (id != products.Id)
+            if (id != products.ID)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace DavidsMusic.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductsExists(products.Id))
+                    if (!ProductsExists(products.ID))
                     {
                         return NotFound();
                     }
@@ -124,7 +124,7 @@ namespace DavidsMusic.Controllers
             }
 
             var products = await _context.Products
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .SingleOrDefaultAsync(m => m.ID == id);
             if (products == null)
             {
                 return NotFound();
@@ -138,7 +138,7 @@ namespace DavidsMusic.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var products = await _context.Products.SingleOrDefaultAsync(m => m.Id == id);
+            var products = await _context.Products.SingleOrDefaultAsync(m => m.ID == id);
             _context.Products.Remove(products);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -146,7 +146,7 @@ namespace DavidsMusic.Controllers
 
         private bool ProductsExists(int id)
         {
-            return _context.Products.Any(e => e.Id == id);
+            return _context.Products.Any(e => e.ID == id);
         }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,8 +12,7 @@ namespace DavidsMusic
 	public class Startup
 	{
 		public Startup(IConfiguration configuration)
-		{
-		
+		{		
 			Configuration = configuration;
 		}
 
@@ -32,29 +27,31 @@ namespace DavidsMusic
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			System.Data.Common.DbConnectionStringBuilder builder =
-				new System.Data.Common.DbConnectionStringBuilder();
+	//		System.Data.Common.DbConnectionStringBuilder builder =
+	//			new System.Data.Common.DbConnectionStringBuilder();
 
 			services.AddMvc();
 			services.AddDistributedMemoryCache();
 			services.AddAntiforgery();
 			services.AddSession();
 
-			services.Configure<Models.ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
-			services.AddOptions();
+			//		services.Configure<Models.ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
+			//		services.AddOptions();
 
 			services.AddDbContext<Models.DavidTestContext>(opt =>
-								opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")
-				, sqlOptions => sqlOptions.MigrationsAssembly(this.GetType().Assembly.FullName))
-				);
-			//  
-			services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-			{
-				options.Password.RequireDigit = false;
-				options.Password.RequiredLength = 5;
-				options.Password.RequireNonAlphanumeric = false;
-				options.Password.RequireUppercase = false;
-			})
+								opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+	//			, sqlOptions => sqlOptions.MigrationsAssembly(this.GetType().Assembly.FullName))
+	//			);
+			
+			// Options for Password reqirements 
+			services.AddIdentity<ApplicationUser, IdentityRole>()
+	//			options =>
+	//		{
+	//			options.Password.RequireDigit = false;
+	//			options.Password.RequiredLength = 5;
+	//			options.Password.RequireNonAlphanumeric = false;
+	//			options.Password.RequireUppercase = false;
+	//		})
 				.AddEntityFrameworkStores<Models.DavidTestContext>()
 				.AddDefaultTokenProviders();
 
@@ -73,6 +70,22 @@ namespace DavidsMusic
 					Configuration["braintree.privatekey"]
 					);
 			});
+
+			services.AddTransient<Microsoft.WindowsAzure.Storage.Blob.CloudBlobClient>((x) =>
+				{
+					Microsoft.WindowsAzure.Storage.CloudStorageAccount account = Microsoft.WindowsAzure.Storage.CloudStorageAccount.Parse(Configuration["StorageConnectionString"]);
+					return account.CreateCloudBlobClient();
+				});
+			
+			//		services.AddTransient<SmartyStreets.USStreetApi.Client>((x) =>
+			//		{
+			//			var client = new SmartyStreets.ClientBuilder(
+			//				Configuration["smartystreets.authid"],
+			//				Configuration["smartystreets.authtoken"])
+			//					.BuildUsStreetApiClient();
+			//		
+			//			return client;
+			//		});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,12 +94,12 @@ namespace DavidsMusic
 			if (env.IsDevelopment())
 			{
 				app.UseBrowserLink(); // auto updates browser when changes are made
-				app.UseDeveloperExceptionPage();
 			}
 			else
 			{
 				app.UseExceptionHandler("/Home/Error");
 			}
+			app.UseDeveloperExceptionPage();
 
 			app.UseSession();
 			app.UseStaticFiles();
@@ -96,7 +109,7 @@ namespace DavidsMusic
 			{
 				routes.MapRoute(
 					name: "default",
-					template: "{controller=Home}/{action=Index}");
+					template: "{controller=Home}/{action=Index}/{id?}");
 			});
 
 			DbInitializer.Initialize(context);

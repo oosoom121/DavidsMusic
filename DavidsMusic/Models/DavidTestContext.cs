@@ -28,6 +28,7 @@ namespace DavidsMusic.Models
 
 		public virtual DbSet<Review> Reviews { get; set; }
 		public virtual DbSet<Order> Orders { get; set; }
+		public virtual DbSet<LineItem> LineItems { get; set; }
 
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -100,7 +101,7 @@ namespace DavidsMusic.Models
 
 			modelBuilder.Entity<Products>(entity =>
 			{
-				entity.Property(e => e.Id).HasColumnName("ID");
+				entity.Property(e => e.ID).HasColumnName("ID");
 
 				entity.Property(e => e.Brand)
 					.IsRequired()
@@ -132,18 +133,18 @@ namespace DavidsMusic.Models
 				entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
 				entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
-
-				entity.HasOne(d => d.Category)
-					.WithMany(p => p.ProductsCategories)
-					.HasForeignKey(d => d.CategoryId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK_PRoductsCategories_Categories");
-
-				entity.HasOne(d => d.Product)
-					.WithMany(p => p.ProductsCategories)
-					.HasForeignKey(d => d.ProductId)
-					.OnDelete(DeleteBehavior.ClientSetNull)
-					.HasConstraintName("FK_ProductsCategories_Products");
+		   //
+			//	entity.HasOne(d => d.Category)
+			//		.WithMany(p => p.Products)
+			//		.HasForeignKey(d => d.CategoryId)
+			//		.OnDelete(DeleteBehavior.ClientSetNull)
+			//		.HasConstraintName("FK_PRoductsCategories_Categories");
+		   //
+			//	entity.HasOne(d => d.Product)
+			//		.WithMany(p => p.Category)
+			//		.HasForeignKey(d => d.ProductId)
+			//		.OnDelete(DeleteBehavior.ClientSetNull)
+			//		.HasConstraintName("FK_ProductsCategories_Products");
 			});
 
 			modelBuilder.Entity<ProductType>(entity =>

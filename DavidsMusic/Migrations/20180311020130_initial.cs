@@ -74,6 +74,7 @@ namespace DavidsMusic.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DateCreated = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
                     DateLastModified = table.Column<DateTime>(type: "datetime", nullable: true, defaultValueSql: "(getdate())"),
+                    Description = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -345,11 +346,11 @@ namespace DavidsMusic.Migrations
                 {
                     table.PrimaryKey("PK_ProductsCategories", x => new { x.ProductID, x.CategoryID });
                     table.ForeignKey(
-                        name: "FK_PRoductsCategories_Categories",
+                        name: "FK_ProductsCategories_Categories_CategoryID",
                         column: x => x.CategoryID,
                         principalTable: "Categories",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ProductsCategories_Products",
                         column: x => x.ProductID,

@@ -7,14 +7,15 @@ namespace DavidsMusic.Models
     {
         public Categories()
         {
-            ProductsCategories = new HashSet<ProductsCategories>();
+            Products = new HashSet<Products>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime? DateCreated { get; set; }
+		public string Description { get; set; }
+		public DateTime? DateCreated { get; set; }
         public DateTime? DateLastModified { get; set; }
 
-        public ICollection<ProductsCategories> ProductsCategories { get; set; }
+        public ICollection<Products> Products { get; set; }
     }
 }

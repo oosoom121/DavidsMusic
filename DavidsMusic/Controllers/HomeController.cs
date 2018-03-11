@@ -17,11 +17,9 @@ namespace DavidsMusic.Controllers
 		public HomeController(DavidTestContext context)
 		{
 			_context = context;
-			//_connectionStrings = connectionStrings.Value;
 		}
 		public IActionResult Index()
         {
-			//return View(_context.Products.Take(4));
 			return View(_context.Products);
 		}
 

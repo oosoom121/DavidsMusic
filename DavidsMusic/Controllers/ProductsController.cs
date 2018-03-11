@@ -17,7 +17,7 @@ namespace DavidsMusic.Controllers
 			//_connectionStrings = connectionStrings.Value;
 		}
 
-		public IActionResult Index(int? ID=1)
+		public IActionResult Index(int id = 1)
 		{
 		//	Models.ProductsViewModel model = new Models.ProductsViewModel();
 		//	System.Data.Common.DbConnectionStringBuilder builder =
@@ -25,13 +25,13 @@ namespace DavidsMusic.Controllers
 
 			//var product = _context.Products.Find(ID);
 			//var product = _context.Products.Include(x => x.Reviews).Single(x => x.Id == ID);
-			var product = _context.Products.AsNoTracking().Include(x => x.Reviews).Single(x => x.Id == ID); 
+			var product = _context.Products.AsNoTracking().Include(x => x.Reviews).Single(x => x.ID == id); 
 																											 
 			return View(product);
 		}
 
 		[HttpPost]
-		public IActionResult Index(int id)
+		public IActionResult Index(int id, bool extraParam = true)
 		{
 			Guid cartId;
 			Cart c;
@@ -50,15 +50,15 @@ namespace DavidsMusic.Controllers
 				c.TrackingNumber = cartId;
 				_context.Cart.Add(c);
 			}
-
+	
 			if (User.Identity.IsAuthenticated)
 			{
 				c.user = _context.Users.Find(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value);
 			}
-
-			if (c.CartItems.Any(x => x.Product.Id == id))
+	
+			if (c.CartItems.Any(x => x.Product.ID == id))
 			{
-				i = c.CartItems.FirstOrDefault(x => x.Product.Id == id);
+				i = c.CartItems.FirstOrDefault(x => x.Product.ID == id);
 			}
 			else
 			{
@@ -68,7 +68,7 @@ namespace DavidsMusic.Controllers
 				c.CartItems.Add(i);
 			}
 			i.Quantity++;
-
+	
 			_context.SaveChanges();
 			Response.Cookies.Append("cartId", c.TrackingNumber.ToString(),
 				new Microsoft.AspNetCore.Http.CookieOptions

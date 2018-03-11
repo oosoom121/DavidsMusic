@@ -12,7 +12,6 @@ namespace DavidsMusic.Models
 		}
 
 		public int ID { get; set; }
-
 		public int Rating { get; set; }
 		public string Body { get; set; }
 		public bool IsApproved { get; set; }

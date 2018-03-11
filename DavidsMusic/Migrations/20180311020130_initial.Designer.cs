@@ -11,7 +11,7 @@ using System;
 namespace DavidsMusic.Migrations
 {
     [DbContext(typeof(DavidTestContext))]
-    [Migration("20180307150912_initial")]
+    [Migration("20180311020130_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -169,6 +169,8 @@ namespace DavidsMusic.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasDefaultValueSql("(getdate())");
+
+                    b.Property<string>("Description");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -485,7 +487,7 @@ namespace DavidsMusic.Migrations
             modelBuilder.Entity("DavidsMusic.Models.Cart", b =>
                 {
                     b.HasOne("DavidsMusic.Models.Products")
-                        .WithMany("Cart")
+                        .WithMany("CartItems")
                         .HasForeignKey("ProductsId");
 
                     b.HasOne("DavidsMusic.Models.ApplicationUser", "user")
@@ -526,16 +528,16 @@ namespace DavidsMusic.Migrations
             modelBuilder.Entity("DavidsMusic.Models.Products", b =>
                 {
                     b.HasOne("DavidsMusic.Models.Categories", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("DavidsMusic.Models.ProductsCategories", b =>
                 {
                     b.HasOne("DavidsMusic.Models.Categories", "Category")
-                        .WithMany("ProductsCategories")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
-                        .HasConstraintName("FK_PRoductsCategories_Categories");
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("DavidsMusic.Models.Products", "Product")
                         .WithMany("ProductsCategories")

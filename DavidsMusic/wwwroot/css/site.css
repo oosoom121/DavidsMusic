@@ -16,7 +16,7 @@ body {
 }
 
 /* Checkout Page */
-.formatForm {
+/*.formatForm {
 	display: flex;
 	float: left;
 	width: 70%;
@@ -27,7 +27,7 @@ body {
 	display: flex;
 	width: 70%;
 }
-
+	*/
 .checkoutSidebar {
 	width:30%;
 	height:458px;
@@ -94,13 +94,8 @@ a.card-link {
 	margin:0 auto;
 	background-color:lightgray;
 }
-/*
-.regpage {
-	border-top-left-radius: 7%;
-	border-top-right-radius: 7%;
-	background-color:cornsilk;
-}
-*/
+
+
 .topLogo {
 	animation-name: spin;
 	animation-duration: 8000ms;
@@ -112,28 +107,13 @@ a.card-link {
 	/* transform: rotate(.03turn);  */
 }
 
-
-/* city state zip */
-.city {
-	width: 60%;
-	float:left;
-}
-.state {
-	width: 25%;
-	float: left;
-}
-.postal {
-	width: 15%;
-	float: left;
-}
-
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
 }
 
-	/* QR code generator */
-	#qrCode {
+/* QR code generator */
+#qrCode {
     margin: 15px;
 }
 

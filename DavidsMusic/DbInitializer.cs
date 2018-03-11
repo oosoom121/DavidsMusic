@@ -17,7 +17,7 @@ namespace DavidsMusic
 			{
 				context.Categories.Add(new Categories
 				{
-					Name = "Instruments",
+					Name = "Guitars",
 					DateCreated = DateTime.Now,
 					DateLastModified = DateTime.Now,
 					//Description = "This is an instrument category",
@@ -25,7 +25,15 @@ namespace DavidsMusic
 
 				context.Categories.Add(new Categories
 				{
-					Name = "Accessories",
+					Name = "Keyboards",
+					DateCreated = DateTime.Now,
+					DateLastModified = DateTime.Now
+					//Description = "This is an accessory category",
+				});
+
+				context.Categories.Add(new Categories
+				{
+					Name = "Percussion",
 					DateCreated = DateTime.Now,
 					DateLastModified = DateTime.Now
 					//Description = "This is an accessory category",

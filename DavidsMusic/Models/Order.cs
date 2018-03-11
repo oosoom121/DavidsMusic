@@ -12,7 +12,7 @@ namespace DavidsMusic.Models
 			LineItems = new HashSet<LineItem>();
 		}
 
-	//	[System.ComponentModel.DataAnnotations.Key]
+		[System.ComponentModel.DataAnnotations.Key]
 		public int OrderID { get; set; }
 		public DateTime SubmittedDate { get; set; }
 		public Guid TrackingNumber { get; set; }

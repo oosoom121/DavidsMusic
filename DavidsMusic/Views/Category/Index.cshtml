@@ -1,0 +1,36 @@
+﻿@model DavidsMusic.Models.Categories
+
+@{
+	ViewData["Title"] = Model.Name;
+}
+
+<div class="col-10">
+	<div class="row">
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="card-deck">
+					@foreach (Products product in Model.Products		)
+					{
+
+						<a class="card-link" asp-controller=Products asp-route-id=@product.Id>
+							<div class="card" style="width: 18rem;">
+								<div class="card-img"><img class="card-img-top m-auto" src="@product.ImageUrl" alt="Card image cap"></div>
+								<div class="card-body">
+									<h5 class="card-title">@product.Brand @product.Type</h5>
+									<p class="card-text">@product.Description</p>
+								</div>
+								<div class="card-text">
+									<a href="#" class="card-link">@product.UnitPrice</a>
+								</div>
+							</div>
+						</a>
+					}
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+</div>

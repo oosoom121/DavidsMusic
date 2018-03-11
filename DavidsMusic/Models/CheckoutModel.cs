@@ -8,6 +8,8 @@ namespace DavidsMusic.Models
 {
     public class CheckoutModel
     {
+		public CartItem[] CartItems { get; set; }
+
 		[Required]
 		[Display(Name="First Name")]
 		public string CustomerFirstName { get; set; }
@@ -26,6 +28,8 @@ namespace DavidsMusic.Models
 		public string CustomerPostal { get; set; }
 		public string CostomerHomePhone { get; set; }
 		public string CustomerCellPhone { get; set; }
+		[Required]
+		[EmailAddress]
 		public string CustomerEmail { get; set; }
 		public string CustomerShippingAddress1 { get; set; }
 		public string CustomerShippingAddress2 { get; set; }
@@ -37,5 +41,17 @@ namespace DavidsMusic.Models
 		public string CustomerBillingCity { get; set; }
 		public string CustomerBillingState { get; set; }
 		public string CustomerBillingPostalCode { get; set; }
+
+		[Required]
+		public string creditcardnumber { get; set; }
+		[Required]
+		public string creditcardname { get; set; }
+		[Required]
+		public string creditcardverificationvalue { get; set; }
+		[Required]
+		public string expirationmonth { get; set; }
+		[Required]
+		public string expirationyear { get; set; }
+
 	}
 }

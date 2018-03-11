@@ -1,97 +1,140 @@
 ﻿@model DavidsMusic.Models.CheckoutModel
 
-	@{
-		ViewData["Title"] = "Checkout";
-	}
-	<section class="bg-dark p-0 m-0">
-		<header class="pages">@ViewData["Title"]</header>
-	</section>
+@{
+	ViewData["Title"] = "Checkout";
+	var states = (new string[] { "", "Alaska","Alabama","Arkansas","American Samoa", "Arizona", "California", "Colorado", "Connecticut",
+			"District of Columbia", "Delaware", "Florida", "Georgia", "Guam", "Hawaii", "Iowa", "Idaho", "Illinois", "Indiana", "Kansas", "Kentucky",
+			"Louisiana", "Massachusetts", "Maryland","Maine", "Michigan", "Minnesota", "Missouri", "Mississippi", "Montana", "North Carolina",
+			"North Dakota", "Nebraska", "New Hampshire", "New Jersey", "New Mexico", "Nevada", "New York","Ohio", "Oklahoma", "Oregon", "Pennsylvania",
+			"Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Virginia", "Virgin Islands", "Vermont",
+			"Washington","Wisconsin", "West Virginia", "Wyoming" }).Select(x => new SelectListItem { Text = x, Value = x });
+}
+<section class="bg-dark p-0 m-0">
+	<header class="pages">@ViewData["Title"]</header>
+</section>
+@if (Model.CartItems != null)
+{
+	<div class="row">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Product</th>
+					<th>Quantity</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+			@foreach (var item in Model.CartItems)
+			{
+				<tr>
+					<td>@item.Product.Brand</td>
+					<td>
+						<form asp-action="update" asp-controller="Checkout" method="post" class="form-inline">
+							<input name="productId" value="@item.Product.ID" type="hidden" />
+							<input name="quantity" value="@item.Quantity" type="number" class="form-control-sm" /><input type="submit" value="Update Quantity" class="btn btn-primary" />
+						</form>
+					</td>
+					<td>@(item.Product.UnitPrice.ToString("c"))</td>
+				</tr>
+			}
+			<tfoot>
+				<tr>
+					<th colspan="2">Subtotal</th>
+					<th>@Model.CartItems.Sum(x => (x.Product.UnitPrice) * x.Quantity).ToString("c")</th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+}
 
 
-	@if (!this.ViewContext.ModelState.IsValid)
-	{
-		<div class="alert alert-danger">
-			@Html.ValidationSummary(false)
-		</div>
-	}
-	<section class="formatForm mutedbackground">
-		<form class="pl-5" id="bootstrap-overrides" method="post" action="">
-			@Html.AntiForgeryToken()
-			<fieldset>
-				<legend>Personal Profile Information</legend>
-				@Html.LabelFor(m => m.CustomerFirstName)
-				@Html.TextBoxFor(m => m.CustomerFirstName, new { @class = "form-control", placeholder = "First Name" })
-				@Html.LabelFor(m => m.CustomerLastName)
-				@Html.TextBoxFor(m => m.CustomerLastName, new { @class = "form-control", placeholder = "Last Name" })
-				@Html.LabelFor(m => m.CustomerAddress1)
-				@Html.TextBoxFor(m => m.CustomerAddress1, new { @class = "form-control", placeholder = "Address 1" })
-				@Html.LabelFor(m => m.CustomerAddress2)
-				@Html.TextBoxFor(m => m.CustomerAddress2, new { @class = "form-control", placeholder = "Address 2" })
+@if (!this.ViewContext.ModelState.IsValid)
+{
+	<div asp-validation-summary="All" class="alert alert-danger"></div>
+}
+<section class="mutedbackground">
+	<form class="pl-5" method="post" asp-action="Index" asp-controller="Checkout" novalidate>
+		<!--		<form class="pl-5" id="bootstrap-overrides" method="post" action="">-->
+		@Html.AntiForgeryToken()
+		<fieldset>
+			<legend>Personal Profile Information</legend>
+			<div class="row">
+				<div class="col">
+					@Html.LabelFor(m => m.CustomerFirstName)
+					@Html.TextBoxFor(m => m.CustomerFirstName, new { @class = "form-control", placeholder = "First Name" })
+					@Html.LabelFor(m => m.CustomerLastName)
+					@Html.TextBoxFor(m => m.CustomerLastName, new { @class = "form-control", placeholder = "Last Name" })
+					@Html.LabelFor(m => m.CustomerAddress1)
+					@Html.TextBoxFor(m => m.CustomerAddress1, new { @class = "form-control", placeholder = "Address 1" })
+					@Html.LabelFor(m => m.CustomerAddress2)
+					@Html.TextBoxFor(m => m.CustomerAddress2, new { @class = "form-control", placeholder = "Address 2" })
 
+					<div class="form-group mt-0 p-0">
+						@Html.LabelFor(m => m.CustomerCity)
+						@Html.TextBoxFor(m => m.CustomerCity, new { @class = (ViewData.ModelState.ContainsKey("CustomerCity") && ViewData.ModelState.FirstOrDefault(x => x.Key == "CustomerCity").Value.ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid ? "form-control is-invalid" : "form-control") })
+						<span asp-validation-for="CustomerCity" class="invalid-feedback"></span>
+					</div>
+					<div class="form-group mt-0 p-0">
+						@Html.LabelFor(m => m.State)
+						<select asp-for="State" asp-items="states" required class="@(ViewData.ModelState.ContainsKey("State") && ViewData.ModelState.FirstOrDefault(x => x.Key == "State").Value.ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid ? "form-control is-invalid" : "form-control")"></select>
+						<span asp-validation-for="State" class="invalid-feedback"></span>
 
-				<div class="col-5 d-inline-flex m-0 p-0">
-					@Html.LabelFor(m => m.CustomerCity)
+					</div>
+					<div class="form-group mt-0 p-0">
+						@Html.LabelFor(m => m.CustomerPostal)
+						@Html.TextBoxFor(m => m.CustomerPostal, new { @class = "form-control", placeholder = "Postal Code" })
+					</div>
 				</div>
-				<div class="col-4 d-inline-flex m-0 p-0">
-					@Html.LabelFor(m => m.State)
-				</div>
-				<div class="col-2 d-inline-flex  m-0 p-0">
-					@Html.LabelFor(m => m.CustomerPostal)
-				</div>
+				<div class="col">
+					<div class="form-group">
+						<label for="creeditcardnumber">Credit Card Number</label>
+						<input type="text" name="creditcardnumber" class="form-control" required />
+					</div>
+					<div class="form-group">
+						<label for="creeditcardverificationvalue">CVV</label>
+						<input type="text" name="creeditcardverificationvalue" class="form-control" required />
+					</div>
+					<div class="row">
+						<div class="col">
 
-				<div class="col-5 d-inline-flex form-group mt-0 p-0">
-					@Html.TextBoxFor(m => m.CustomerCity, new { @class = (ViewData.ModelState.ContainsKey("CustomerCity") && ViewData.ModelState.FirstOrDefault(x => x.Key == "CustomerCity").Value.ValidationState == Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid ? "form-control is-invalid" : "form-control") })
-					<span asp-validation-for="CustomerCity" class="invalid-feedback"></span>
-				</div>
-				<div class="col-4 d-inline-flex form-group mt-0 p-0">
-					@Html.DropDownListFor(m => m.State, ((string[])ViewData["States"]).Select(x => new SelectListItem { Text = x, Value = x }), new { @class = "form-control" })
+							<div class="form-group">
+								<label for="expirationmonth">Expiration Month</label>
+								<select type="text" name="expirationmonth" class="form-control" required>
+									<option value="01">01</option>
+									<option value="02">02</option>
+									<option value="03">03</option>
+									<option value="04">04</option>
+									<option value="05">05</option>
+									<option value="06">06</option>
+									<option value="07">07</option>
+									<option value="08">08</option>
+									<option value="09">09</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+								</select>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<label for="expirationyear">Expiration Month</label>
+								<select type="text" name="expirationyear" class="form-control" required>
+									<option value="2018">2018</option>
+									<option value="2019">2019</option>
+									<option value="2020">2020</option>
+									<option value="2021">2021</option>
+									<option value="2022">2022</option>
+								</select>
+							</div>
+						</div>
+					</div>
 
 				</div>
-				<div class="col-2 d-inline-flex form-group mt-0 p-0">
-					@Html.TextBoxFor(m => m.CustomerPostal, new { @class = "form-control", placeholder = "Postal Code" })
-				</div>
-				<div class="form-group">
-					<label for="creeditcardnumber">Credit Card Number</label>
-					<input type="text" name="creditcardnumber" class="form-control" required />
-				</div>
-				<div class="form-group">
-					<label for="creeditcardverificationvalue">CVV</label>
-					<input type="text" name="creeditcardverificationvalue" class="form-control" required />
-				</div>
-				<div class="form-group">
-					<label for="expirationmonth">Expiration Month</label>
-					<select type="text" name="expirationmonth" class="form-control" required>
-						<option value="01">01</option>
-						<option value="02">02</option>
-						<option value="03">03</option>
-						<option value="04">04</option>
-						<option value="05">05</option>
-						<option value="06">06</option>
-						<option value="07">07</option>
-						<option value="08">08</option>
-						<option value="09">09</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="expirationyear">Expiration Month</label>
-					<select type="text" name="expirationyear" class="form-control" required>
-						<option value="2018">2018</option>
-						<option value="2019">2019</option>
-						<option value="2020">2020</option>
-						<option value="2021">2021</option>
-						<option value="2022">2022</option>
-					</select>
-				</div>
-
-			</fieldset>
-			<div class="pb-3 ml-5">
-				<input type="submit" value="Submit Information" />&nbsp;&nbsp;
-				<input type="reset" value="Reset Form" />
 			</div>
-		</form>
-		<br />
-	</section>
-	<div class="checkoutSidebar ml-auto"></div>
+		</fieldset>
+		<div class="pb-3 ml-5">
+			<input type="submit" value="Submit Information" />&nbsp;&nbsp;
+			<input type="reset" value="Reset Form" />
+		</div>
+	</form>
+	<br />
+</section>

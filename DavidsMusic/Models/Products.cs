@@ -8,12 +8,12 @@ namespace DavidsMusic.Models
         public Products()
         {
 			Reviews = new HashSet<Review>();
-            Cart = new HashSet<Cart>();
-            ProductsCategories = new HashSet<ProductsCategories>();
+            CartItems = new HashSet<Cart>();
+ //           ProductsCategories = new HashSet<ProductsCategories>();
 			LineItems = new HashSet<LineItem>();
         }
 
-        public int Id { get; set; }
+        public int ID { get; set; }
         public int? StockNumber { get; set; }
         public string Type { get; set; }
         public string Brand { get; set; }
@@ -28,8 +28,8 @@ namespace DavidsMusic.Models
 		public ICollection<LineItem> LineItems { get; set; }
 
 
-		public ICollection<Cart> Cart { get; set; }
-        public ICollection<ProductsCategories> ProductsCategories { get; set; }
+		public ICollection<Cart> CartItems { get; set; }
+  //      public ICollection<ProductsCategories> ProductsCategories { get; set; }
 
     }
 }
