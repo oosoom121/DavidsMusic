@@ -190,6 +190,11 @@ namespace DavidsMusic.Controllers
 			return RedirectToAction("ResetSent");
 		}
 
+		public IActionResult ResetSent()
+		{
+			return View();
+		}
+
 		public IActionResult ResetPassword()
 		{
 			return View();

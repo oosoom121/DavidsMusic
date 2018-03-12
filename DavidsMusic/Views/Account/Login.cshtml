@@ -6,19 +6,22 @@
 		<header class="pages">@ViewData["Title"]</header>
 	</section>
 	<div asp-validation-summary="All"></div>
-	<div class="card regcard">
-		<br />
-		<div class="card-body">
-			<form method="post" asp-action="register" asp-controller="account">
-				<label>Username</label>
-				<input type="text" name="username" required class="form-control" placeholder="Username" /><br />
-				<label>Password</label>
-				<input type="password" name="password" required class="form-control" placeholder="Password" /><br />
-				<input class="regButt" type="submit" value="Loging" />
-			</form>
+	<div class="row">
+		<div class="card col-4 m-auto">
+			<br />
+			<div class="card-body">
+				<form method="post" asp-action="login" asp-controller="account">
+					<label>Username</label>
+					<input type="text" name="username" required class="form-control" placeholder="Username" /><br />
+					<label>Password</label>
+					<input type="password" name="password" required class="form-control" placeholder="Password" /><br />
+					<input class="regButt" type="submit" value="Log In" />
+				</form>
+			</div>
+
+			<br />
+			<a asp-action="ForgotPassword">Forgot your Password?</a><!-- Change this phraise and action location after example is complete. -->
 		</div>
-		<br />
-		<a asp-action="ForgotPassword">Forgot your Password?  Reset it!</a><!-- Change this phraise and action location after example is complete. -->
 	</div>
 	<br />
 </main>
