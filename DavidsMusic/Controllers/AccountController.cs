@@ -42,6 +42,13 @@ namespace DavidsMusic.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Login(string username, string password)
 		{
+			// TODO: Test user name for email address format. /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+			System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+			if (string.IsNullOrEmpty(username) || !regex.IsMatch(username))
+			{
+				ModelState.AddModelError("username", "The email address entered is invalid!");
+			}
+
 			if (ModelState.IsValid)
 			{
 				ApplicationUser existingUser = await _signInManager.UserManager.FindByNameAsync(username); // Identify user by username
@@ -78,6 +85,13 @@ namespace DavidsMusic.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Register(string username, string password)
 		{
+			// TODO: test username for email address format
+			System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+			if (string.IsNullOrEmpty(username) || !regex.IsMatch(username))
+			{
+				ModelState.AddModelError("username", "The email address entered is invalid!");
+			}
+
 			if (ModelState.IsValid)
 			{
 				ApplicationUser registerUser = new ApplicationUser();
@@ -117,13 +131,13 @@ namespace DavidsMusic.Controllers
 				}
 			}
 
-			ViewData["RegStates"] = new string[] { "Alaska","Alabama","Arkansas","American Samoa", "Arizona", "California", "Colorado", "Connecticut",
-					"District of Columbia", "Delaware", "Florida", "Georgia", "Guam", "Hawaii", "Iowa", "Idaho", "Illinois", "Indiana", "Kansas", "Kentucky",
-					"Louisiana", "Massachusetts", "Maryland","Maine", "Michigan", "Minnesota", "Missouri", "Mississippi", "Montana", "North Carolina",
-					"North Dakota", "Nebraska", "New Hampshire", "New Jersey", "New Mexico", "Nevada", "New York","Ohio", "Oklahoma", "Oregon", "Pennsylvania",
-					"Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Virginia", "Virgin Islands", "Vermont",
-					"Washington","Wisconsin", "West Virginia", "Wyoming"
-			};
+		//	ViewData["RegStates"] = new string[] { "Alaska","Alabama","Arkansas","American Samoa", "Arizona", "California", "Colorado", "Connecticut",
+		//			"District of Columbia", "Delaware", "Florida", "Georgia", "Guam", "Hawaii", "Iowa", "Idaho", "Illinois", "Indiana", "Kansas", "Kentucky",
+		//			"Louisiana", "Massachusetts", "Maryland","Maine", "Michigan", "Minnesota", "Missouri", "Mississippi", "Montana", "North Carolina",
+		//			"North Dakota", "Nebraska", "New Hampshire", "New Jersey", "New Mexico", "Nevada", "New York","Ohio", "Oklahoma", "Oregon", "Pennsylvania",
+		//			"Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Virginia", "Virgin Islands", "Vermont",
+		//			"Washington","Wisconsin", "West Virginia", "Wyoming"
+		//	};
 
 			//	Register regmodel = new Register();
 			//	regmodel.RegFirstName = HttpContext.Request.Form["RegFirstName"].ToString();

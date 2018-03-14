@@ -27,16 +27,16 @@ namespace DavidsMusic
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-	//		System.Data.Common.DbConnectionStringBuilder builder =
-	//			new System.Data.Common.DbConnectionStringBuilder();
+			System.Data.Common.DbConnectionStringBuilder builder =
+				new System.Data.Common.DbConnectionStringBuilder();
 
 			services.AddMvc();
 			services.AddDistributedMemoryCache();
 			services.AddAntiforgery();
 			services.AddSession();
 
-			//		services.Configure<Models.ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
-			//		services.AddOptions();
+					services.Configure<Models.ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
+					services.AddOptions();
 
 			services.AddDbContext<Models.DavidTestContext>(opt =>
 								opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -44,14 +44,14 @@ namespace DavidsMusic
 	//			);
 			
 			// Options for Password reqirements 
-			services.AddIdentity<ApplicationUser, IdentityRole>()
-	//			options =>
-	//		{
-	//			options.Password.RequireDigit = false;
-	//			options.Password.RequiredLength = 5;
-	//			options.Password.RequireNonAlphanumeric = false;
-	//			options.Password.RequireUppercase = false;
-	//		})
+			services.AddIdentity<ApplicationUser, IdentityRole>(
+				options =>
+			{
+				options.Password.RequireDigit = false;
+				options.Password.RequiredLength = 5;
+				options.Password.RequireNonAlphanumeric = false;
+				options.Password.RequireUppercase = false;
+			})
 				.AddEntityFrameworkStores<Models.DavidTestContext>()
 				.AddDefaultTokenProviders();
 

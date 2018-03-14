@@ -9,76 +9,81 @@
 	<div asp-validation-summary="All"></div>
 
 
-	<section class="formatForm regForm mutedbackground">
-		<form method="post" asp-action="register" asp-controller="account">
-				<fieldset>
-					<legend>Registration Information</legend>
-					<!--				<div class="form-group">
-								<label for="RegFirstName">First Name</label>
-								<input type="text" id="RegFirstName" name="RegFirstName" class="form-control form-control-sm" placeholder="First Name">
+	<section class="formatForm regForm">
+		<div class="row">
+			<div class="card col-5 m-auto">
+				<div class="card-body">
+					<form method="post" asp-action="register" asp-controller="account">
+						<fieldset>
+							<legend>Registration Information</legend>
+							<!--				<div class="form-group">
+												<label for="RegFirstName">First Name</label>
+												<input type="text" id="RegFirstName" name="RegFirstName" class="form-control form-control-sm" placeholder="First Name">
+											</div>
+											<div class="form-group">
+												<label for="RegLastName">Last Name</label>
+												<input type="text" id="RegLastName" name="RegLastName" class="form-control" placeholder="Last Name">
+											</div>
+											<div class="form-group">
+												<label for="RegAddress1">Address 1</label>
+												<input type="text" id="RegAddress1" name="RegAddress1" class="form-control" placeholder="Address 1">
+											</div>
+											<div class="form-group">
+												<label for="RegAddress2">Address 1</label>
+												<input type="text" id="RegAddress2" name="RegAddress2" class="form-control" placeholder="Address 2">
+											</div>
+
+											<div class="col-5 d-inline-flex m-0 p-0">
+												<label for="regCity">City</label>
+											</div>
+											<div class="col-4 d-inline-flex m-0 p-0">
+												<label for="RegState">State</label>
+											</div>
+											<div class="col-2 d-inline-flex  m-0 p-0">
+												<label for="RegPostal">Postal Code</label>
+											</div>
+											<div class="col-5 d-inline-flex form-group mt-0 p-0">
+												<input type="text" id="RegCity" name="RegCity" class="form-control" placeholder="City">
+											</div>
+											<div class="col-4 d-inline-flex form-group mt-0 p-0">
+												<input type="text" id="RegState" name="RegState" class="form-control" placeholder="State">
+											</div>
+											<div class="col-2 d-inline-flex form-group mt-0 p-0">
+												<input type="text" id="RegPostal" name="RegPostal" class="form-control" placeholder="Postal">
+											</div>
+
+											<div class="form-group">
+												<label for="RegHomePhone">Home Phone</label>
+												<input type="text" id="RegHomePhone" name="RegHomePhone" class="form-control" placeholder="Home Phone">
+											</div>
+											<div class="form-group">
+												<label for="RegCellPhone">Cell Phone</label>
+												<input type="text" id="RegCellPhone" name="RegCellPhone" class="form-control" placeholder="Cell Phone">
+											</div>
+											<div class="form-group">
+												<label for="RegEmail">Email Address</label>
+												<input type="text" id="RegEmail" name="RegEmail" class="form-control" placeholder="Email Address">
+											</div>
+
+							-->
+							<div class="form-group">
+								<label for="UserName">Email Address</label>
+								<input type="text" id="UserName" name="UserName" class="form-control" placeholder="Email Address" required />
 							</div>
 							<div class="form-group">
-								<label for="RegLastName">Last Name</label>
-								<input type="text" id="RegLastName" name="RegLastName" class="form-control" placeholder="Last Name">
-							</div>
-							<div class="form-group">
-								<label for="RegAddress1">Address 1</label>
-								<input type="text" id="RegAddress1" name="RegAddress1" class="form-control" placeholder="Address 1">
-							</div>
-							<div class="form-group">
-								<label for="RegAddress2">Address 1</label>
-								<input type="text" id="RegAddress2" name="RegAddress2" class="form-control" placeholder="Address 2">
+								<label for="Password">Password</label>
+								<input type="password" id="Password" name="Password" class="form-control" placeholder="Password" required />
 							</div>
 
-							<div class="col-5 d-inline-flex m-0 p-0">
-								<label for="regCity">City</label>
-							</div>
-							<div class="col-4 d-inline-flex m-0 p-0">
-								<label for="RegState">State</label>
-							</div>
-							<div class="col-2 d-inline-flex  m-0 p-0">
-								<label for="RegPostal">Postal Code</label>
-							</div>
-							<div class="col-5 d-inline-flex form-group mt-0 p-0">
-								<input type="text" id="RegCity" name="RegCity" class="form-control" placeholder="City">
-							</div>
-							<div class="col-4 d-inline-flex form-group mt-0 p-0">
-								<input type="text" id="RegState" name="RegState" class="form-control" placeholder="State">
-							</div>
-							<div class="col-2 d-inline-flex form-group mt-0 p-0">
-								<input type="text" id="RegPostal" name="RegPostal" class="form-control" placeholder="Postal">
-							</div>
+						</fieldset><br />
+						<div class="mb-3">
+							<input class="regButt" type="submit" value="Register" />&nbsp;&nbsp;
+						</div>
 
-							<div class="form-group">
-								<label for="RegHomePhone">Home Phone</label>
-								<input type="text" id="RegHomePhone" name="RegHomePhone" class="form-control" placeholder="Home Phone">
-							</div>
-							<div class="form-group">
-								<label for="RegCellPhone">Cell Phone</label>
-								<input type="text" id="RegCellPhone" name="RegCellPhone" class="form-control" placeholder="Cell Phone">
-							</div>
-							<div class="form-group">
-								<label for="RegEmail">Email Address</label>
-								<input type="text" id="RegEmail" name="RegEmail" class="form-control" placeholder="Email Address">
-							</div>
-
-			-->
-					<div class="form-group">
-						<label for="UserName">UserName</label>
-						<input type="text" id="UserName" name="UserName" class="form-control" placeholder="UserName" required />
-					</div>
-					<div class="form-group">
-						<label for="Password">Password</label>
-						<input type="password" id="Password" name="Password" class="form-control" placeholder="Password" required />
-					</div>
-
-				</fieldset><br />
-				<div class="mb-3">
-					<input class="regButt" type="submit" value="Register" />&nbsp;&nbsp;
-					<input class="regButt" type="reset" value="Reset Form" />
+					</form>
 				</div>
-			</form>
-</section>
-	<div class="checkoutSidebar ml-auto"></div>
+			</div>
+		</div>
+	</section>
 </main>
 

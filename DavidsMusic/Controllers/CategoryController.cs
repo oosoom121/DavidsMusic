@@ -18,12 +18,8 @@ namespace DavidsMusic.Controllers
 			_context = context;
 		}
 
-		public IActionResult Index(int? id, string diet)
+		public IActionResult Index(int id)
 		{
-			if (id == null)
-			{
-				return NotFound();
-			}
 			var category = _context.Categories.Include(x => x.Products)
 				.SingleOrDefault(m => m.Id == id);
 			if (category == null)
