@@ -51,7 +51,7 @@ namespace DavidsMusic
 					Description = "Gibson Les Paul\nGibson Les Paul Electric guitar.",
 					ImageUrl = "/images/LP-2.png",
 					UnitPrice = 1089.00M,
-				//	Category = context.Categories.First(x => x.Name == "Instruiments")
+					Category = context.Categories.First(x => x.Id == 1)
 				});
 				context.Products.Add(new Products
 				{
@@ -61,7 +61,7 @@ namespace DavidsMusic
 					Description = "Gibson Les Paul\nGibson VOS '57Les Paul Goldtop (Reissue).",
 					ImageUrl = "/images/LP-3.png",
 					UnitPrice = 3255.00M,
-				//	Category = context.Categories.First(x => x.Name == "Instruiments")
+					Category = context.Categories.First(x => x.Id == 1)
 
 				});
 				context.Products.Add(new Products
@@ -72,7 +72,7 @@ namespace DavidsMusic
 					Description = "Gibson Les Paul\nGibson-Historic-’59-Les-Paul-Reissue-VOS.",
 					ImageUrl = "/images/LP-4.png",
 					UnitPrice = 3025.00M,
-				//	Category = context.Categories.First(x => x.Name == "Instruiments")
+					Category = context.Categories.First(x => x.Id == 1)
 				});
 
 				context.Products.Add(new Products
@@ -83,7 +83,7 @@ namespace DavidsMusic
 					Description = "Gibson Les Paul\nGibson Custom 1959 Les Paul Standard Reissue.",
 					ImageUrl = "/images/LP-5.png",
 					UnitPrice = 2855.00M,
-				//	Category = context.Categories.First(x => x.Name == "Instruiments")
+					Category = context.Categories.First(x => x.Id == 1)
 				});
 
 				context.Products.Add(new Products
@@ -94,7 +94,7 @@ namespace DavidsMusic
 					Description = "Yamaha accoustic upright piano.",
 					ImageUrl = "/images/yampiano.jpg",
 					UnitPrice = 1549.99M,
-				//	Category = context.Categories.First(x => x.Name == "Instruiments")
+					Category = context.Categories.First(x => x.Id == 2)
 				});
 				context.SaveChanges();
 			}

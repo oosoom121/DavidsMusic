@@ -7,15 +7,17 @@
 	<header class="pages">@ViewData["Title"]</header>
 </section>
 
-<div class="col-10">
-	<div class="row">
-		<div class="container">
-
-			@foreach (var product in Model.Products)
+<div class="row">
+	<div class="col-10">
+		<div class="row">
+			@foreach (Products product in Model.Products)
 			{
-				<a class="btn regButt" asp-controller=Products asp-route-id=@product.ID>@product.StockNumber</a>
+				<div class="col-3">
+					<h3>@product.Brand</h3>
+					<img src="@product.ImageUrl" class="img-fluid" />
+					<a asp-area="" asp-controller="Products" asp-action="Index" asp-route-id="@product.ID">View Details</a>
+				</div>
 			}
 		</div>
-
 	</div>
 </div>

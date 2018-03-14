@@ -26,7 +26,9 @@ namespace DavidsMusic.Controllers
 			{
 				return NotFound();
 			}
-	
+
+			category.Products = category.Products.ToArray();
+
 			return View(category);
 		}
 	}
