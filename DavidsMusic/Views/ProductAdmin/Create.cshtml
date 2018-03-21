@@ -2,13 +2,8 @@
 
 @{
 	ViewData["Title"] = "Create";
-
-	var types = (new string[] {
-"",
-"Guitar",
-"Piano",
-"Percussion"
-}).Select(x => new SelectListItem { Text = x, Value = x });
+	IEnumerable<Categories> cats = ViewData["Categories"] as IEnumerable<Categories>;
+	var types = cats.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
 }
 
 <section class="mutedbackground">

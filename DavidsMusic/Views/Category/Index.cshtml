@@ -8,16 +8,20 @@
 </section>
 
 <div class="row">
-	<div class="col-10">
+	<div class="col-10 m-auto">
 		<div class="row">
-			@foreach (Products product in Model.Products)
-			{
-				<div class="col-3">
-					<h3>@product.Brand</h3>
-					<img src="@product.ImageUrl" class="img-fluid" />
-					<a asp-area="" asp-controller="Products" asp-action="Index" asp-route-id="@product.ID">View Details</a>
-				</div>
-			}
+			<div class="card-columns">
+				@foreach (Products product in Model.Products)
+				{
+					<div class="card">
+						<div class="card-header">@product.Brand</div>
+						<img src="@product.ImageUrl" class="card-img" />
+						<div class="card-footer">
+							<a asp-area="" asp-controller="Products" asp-action="Index" asp-route-id="@product.ID">View Details</a>
+						</div>
+					</div>
+				}
+			</div>
 		</div>
 	</div>
 </div>

@@ -45,6 +45,7 @@ namespace DavidsMusic.Controllers
         // GET: Products1/Create
         public IActionResult Create()
         {
+			ViewData["Categories"] = _context.Categories.ToList();
             return View();
         }
 
@@ -53,10 +54,17 @@ namespace DavidsMusic.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("Id,StockNumber,Type,Brand,Description,UnitPrice,ImageUrl,DateCreated,DateLastModified")] Products products)
+		public async Task<IActionResult> Create([Bind("Id, CategoryId, StockNumber,Type,Brand,Description,UnitPrice,ImageUrl,DateCreated,DateLastModified")] Products products)
 		{
 			if (ModelState.IsValid)
             {
+				int categoryId;
+				if (int.TryParse(products.Type, out categoryId))
+				{
+					products.Category = _context.Categories.Find(categoryId);
+					products.Type = products.Category.Name;
+				}
+
                 _context.Add(products);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -64,20 +72,21 @@ namespace DavidsMusic.Controllers
             return View(products);
         }
 
-        // GET: Products1/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+		// GET: Products1/Edit/5
+		public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var products = await _context.Products.SingleOrDefaultAsync(m => m.ID == id);
+			Products products = await _context.Products.SingleOrDefaultAsync(m => m.ID == id);
             if (products == null)
             {
                 return NotFound();
             }
-            return View(products);
+
+			return View(products);
         }
 
         // POST: Products1/Edit/5
@@ -85,17 +94,17 @@ namespace DavidsMusic.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StockNumber,Type,Brand,Description,UnitPrice,ImageUrl,DateCreated,DateLastModified")] Products products)
+        public async Task<IActionResult> Edit(int id, [Bind("ID, StockNumber,Type,Brand,Description,UnitPrice,ImageUrl,DateCreated,DateLastModified")] Products products)
         {
-            if (id != products.ID)
-            {
-                return NotFound();
-            }
+			 if (id != products.ID)
+			 {
+			     return NotFound();
+			 }
 
             if (ModelState.IsValid)
             {
-                try
-                {
+				try
+				{
                     _context.Update(products);
                     await _context.SaveChangesAsync();
                 }

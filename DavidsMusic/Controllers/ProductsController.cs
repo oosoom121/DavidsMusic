@@ -116,7 +116,7 @@ namespace DavidsMusic.Controllers
 //				HttpContext.Session.Set(cartId, objectBytes);
 //
 
-			return RedirectToAction("Index", "Checkout");
+			return RedirectToAction("shoppingCart", "Checkout");
 		}
 	}
 }

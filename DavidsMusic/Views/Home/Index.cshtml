@@ -7,7 +7,7 @@
 	<header class="pages">@ViewData["Title"]</header>
 </section>
 <!-- *****  Carousel  ***** -->
-<div id="carouselExampleIndicators" class="carousel slide col-8 m-auto" data-ride="carousel">
+<div id="carouselExampleIndicators" class="carousel slide col-10 m-auto" data-ride="carousel">
 	<ol class="carousel-indicators">
 		<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 		<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -16,48 +16,107 @@
 	</ol>
 	<div class="carousel-inner">
 		<div class="carousel-item active">
-
-			<img src="~/images/banner1.svg" alt="...">
-			<div class="carousel-caption d-none d-md-block">
-				<p>
-					Learn how to build ASP.NET apps that can run anywhere.
-					<a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-						Learn More
-					</a>
-				</p>
+			<div class="card">
+				<div class="card-header text-center text-white bg-primary">
+					<h4>General Musical Instrument Care</h4>
+				</div>
+				<div class="card-body cb-color pr-5 pl-5">
+					<ul>
+						<li>
+							Always keep your instrument in its case when not in use. Make sure case handles, hinges, locks and zippers are working properly
+						</li>
+						<li>
+							Never set anything on top of your instrument, and never store anything on top of your instrument inside its case.
+						</li>
+						<li>
+							Don’t leave you instrument in extreme temperatures, as fluctuations can warp and damage your instrument.
+						</li>
+						<li>
+							Don’t leave your instrument unattended, whether inside or outside of its case.
+						</li>
+						<li>
+							If your instrument is being brought inside from colder temperatures, allow it to warm up to room temperature before playing.
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<div class="carousel-item">
-			<img src="~/images/banner2.svg" alt="...">
-			<div class="carousel-caption d-none d-md-block">
-				<p>
-					There are powerful new features in Visual Studio for building modern web apps.
-					<a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-						Learn More
-					</a>
-				</p>
+			<div class="card">
+				<div class="card-header text-center text-white bg-primary">
+					<h4>Caring for Stringed Instruments</h4>
+				</div>
+				<div class="card-body cb-color pr-5 pl-5">
+					<ul>
+						<li>
+							Don’t store your shoulder rest on your instrument or in your instrument case. Use a separate bag for storage.
+						</li>
+						<li>
+							Always set your instrument down string-side-up, even when in the case.
+						</li>
+						<li>
+							Use an instrument polish every two to four weeks to keep rosin from building up on your instrument.
+						</li>
+						<li>
+							Do not replace all strings at once, replace them gradually so as not to reduce string tension. Always wash your hands before replacing strings.
+						</li>
+						<li>
+							Use the tuning pegs to tune your instrument first, then make minor adjustments with the fine tuners. Peg drops can keep tuning pegs from slipping.
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<div class="carousel-item">
-			<img src="~/images/banner3.svg" alt="...">
-			<div class="carousel-caption d-none d-md-block">
-				<p>
-					Bring in libraries from NuGet and npm, and automate tasks using Grunt or Gulp.
-					<a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525029&clcid=0x409">
-						Learn More
-					</a>
-				</p>
+			<div class="card">
+				<div class="card-header text-center text-white bg-primary">
+					<h4>Caring for Wind Instruments</h4>
+				</div>
+				<div class="card-body cb-color pr-5 pl-5">
+					<ul>
+						<li>
+							Remove neck straps from your instrument before putting it in its case.
+						</li>
+						<li>
+							Always use a tenon plug when storing your saxophone.
+						</li>
+						<li>
+							Avoid eating, drinking sugary liquids or chewing gum immediately prior to playing your instrument.
+						</li>
+						<li>
+							Always pull a clean, dry swab through your instrument to remove any moisture prior to storage.
+						</li>
+						<li>
+							Apply a very limited amount of cork grease to cork joints when needed by rubbing a small dab of grease into the cork.
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<div class="carousel-item">
-			<img src="~/images/banner4.svg" alt="...">
-			<div class="carousel-caption d-none d-md-block">
-				<p>
-					Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-					<a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-						Learn More
-					</a>
-				</p>
+			<div class="card">
+				<div class="card-header text-center text-white bg-primary">
+					<h4>Caring for Brass Instruments</h4>
+				</div>
+				<div class="card-body cb-color pr-5 pl-5">
+					<ul>
+						<li>
+							Make sure your instrument is completely dry prior to placing it in your case.
+						</li>
+						<li>
+							Avoid eating, drinking sugary liquids or chewing gum immediately prior to playing your instrument.
+						</li>
+						<li>
+							Always remove your mouthpiece after playing. Regularly clean your mouthpiece with warm water and mild soap.
+						</li>
+						<li>
+							If your mouthpiece is dry, apply a thin layer of valve oil to the bore to keep it from getting stuck.
+						</li>
+						<li>
+							Move all possible parts at least every couple of weeks.
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -77,8 +136,8 @@
 <!--  *****  Product Cards  *****  -->
 <div class="container">
 	<div class="row">
-		<div class="card-columns">
-			@foreach (var product in Model)
+		<div class="card-deck">
+			@foreach (var product in Model.Take(4))
 			{
 				<a class="card-link" asp-controller=Products asp-route-id=@product.ID>
 					<div class="card border-secondary">
@@ -88,7 +147,7 @@
 							<p class="card-text">@product.Description</p>
 						</div>
 						<div class="card-text">
-							<a href="#" class="card-link">@product.UnitPrice</a>
+							<a href="#" class="card-link">@string.Format("{0:c}",  @product.UnitPrice)</a>
 						</div>
 					</div>
 				</a>

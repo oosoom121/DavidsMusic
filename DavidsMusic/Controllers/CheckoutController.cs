@@ -55,7 +55,8 @@ namespace DavidsMusic.Controllers
 				}
 				_context.SaveChanges();
 			}
-			return RedirectToAction("Index");
+		//	return RedirectToAction("Index");
+			return RedirectToAction("shoppingCart");
 		}
 
 		[HttpPost]
@@ -76,35 +77,55 @@ namespace DavidsMusic.Controllers
 			return View();
 		}
 
-
-//		[HttpPost]
-//		[ValidateAntiForgeryToken]
-//		public IActionResult Index(CheckoutModel model)
-//		{
-//			string custFirstName = model.CustomerFirstName;
-//
-//			//return this.Json(model);
-//			if (ModelState.IsValid)
-//			{
-//				return this.RedirectToAction("Index", "Home");
-//			}
-//			else
-//			{
-//				ViewData["States"] = new string[] { "Alaska" };
-//				return View();
-//			}
-//			
-//			//return View();
-//		}
-
-	//	public IActionResult ValidateAddress()
+	//	public IActionResult shoppingCart()
 	//	{
-	//		SmartyStreets.USStreetApi.Lookup lookup = new SmartyStreets.USStreetApi.Lookup();
-	//		lookup.Street = "222 W Ontario";
-	//		lookup.City = "Chicago";
-	//		lookup.State = "IL";
-	//		_usSteetClient.Send(lookup);
-	//		return Json(lookup.Result);
+	//		return View();
 	//	}
+
+		// GET: /<controller>/
+		public IActionResult shoppingCart()
+		{
+			string cartId;
+			Guid trackingNumber;
+			CheckoutModel model = new CheckoutModel();
+			if (Request.Cookies.TryGetValue("cartId", out cartId) && Guid.TryParse(cartId, out trackingNumber) && _context.Cart.Any(x => x.TrackingNumber == trackingNumber))
+			{
+
+				var cart = _context.Cart.Include(x => x.CartItems).ThenInclude(y => y.Product).Single(x => x.TrackingNumber == trackingNumber);
+				model.CartItems = cart.CartItems.ToArray();
+			}
+			return View(model);
+		}
+
+
+		//		[HttpPost]
+		//		[ValidateAntiForgeryToken]
+		//		public IActionResult Index(CheckoutModel model)
+		//		{
+		//			string custFirstName = model.CustomerFirstName;
+		//
+		//			//return this.Json(model);
+		//			if (ModelState.IsValid)
+		//			{
+		//				return this.RedirectToAction("Index", "Home");
+		//			}
+		//			else
+		//			{
+		//				ViewData["States"] = new string[] { "Alaska" };
+		//				return View();
+		//			}
+		//			
+		//			//return View();
+		//		}
+
+		//	public IActionResult ValidateAddress()
+		//	{
+		//		SmartyStreets.USStreetApi.Lookup lookup = new SmartyStreets.USStreetApi.Lookup();
+		//		lookup.Street = "222 W Ontario";
+		//		lookup.City = "Chicago";
+		//		lookup.State = "IL";
+		//		_usSteetClient.Send(lookup);
+		//		return Json(lookup.Result);
+		//	}
 	}
 }

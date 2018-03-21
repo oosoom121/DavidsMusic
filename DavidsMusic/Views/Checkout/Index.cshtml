@@ -3,60 +3,71 @@
 @{
 	ViewData["Title"] = "Checkout";
 	var states = (new string[] { "", "Alaska","Alabama","Arkansas","American Samoa", "Arizona", "California", "Colorado", "Connecticut",
-			"District of Columbia", "Delaware", "Florida", "Georgia", "Guam", "Hawaii", "Iowa", "Idaho", "Illinois", "Indiana", "Kansas", "Kentucky",
-			"Louisiana", "Massachusetts", "Maryland","Maine", "Michigan", "Minnesota", "Missouri", "Mississippi", "Montana", "North Carolina",
-			"North Dakota", "Nebraska", "New Hampshire", "New Jersey", "New Mexico", "Nevada", "New York","Ohio", "Oklahoma", "Oregon", "Pennsylvania",
-			"Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Virginia", "Virgin Islands", "Vermont",
-			"Washington","Wisconsin", "West Virginia", "Wyoming" }).Select(x => new SelectListItem { Text = x, Value = x });
+"District of Columbia", "Delaware", "Florida", "Georgia", "Guam", "Hawaii", "Iowa", "Idaho", "Illinois", "Indiana", "Kansas", "Kentucky",
+"Louisiana", "Massachusetts", "Maryland","Maine", "Michigan", "Minnesota", "Missouri", "Mississippi", "Montana", "North Carolina",
+"North Dakota", "Nebraska", "New Hampshire", "New Jersey", "New Mexico", "Nevada", "New York","Ohio", "Oklahoma", "Oregon", "Pennsylvania",
+"Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Virginia", "Virgin Islands", "Vermont",
+"Washington","Wisconsin", "West Virginia", "Wyoming" }).Select(x => new SelectListItem { Text = x, Value = x });
 }
 <section class="bg-dark p-0 m-0">
 	<header class="pages">@ViewData["Title"]</header>
 </section>
-@if (Model.CartItems != null)
-{
-	<div class="row">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Product</th>
-					<th>Quantity</th>
-					<th>Price</th>
-				</tr>
-			</thead>
-			@foreach (var item in Model.CartItems)
-			{
-				<tr>
-					<td>@item.Product.Brand</td>
-					<td>
-						<form asp-action="update" asp-controller="Checkout" method="post" class="form-inline">
-							<input name="productId" value="@item.Product.ID" type="hidden" />
-							<input name="quantity" value="@item.Quantity" type="number" class="form-control-sm" /><input type="submit" value="Update Quantity" class="btn btn-primary" />
-						</form>
-					</td>
-					<td>@(item.Product.UnitPrice.ToString("c"))</td>
-				</tr>
-			}
-			<tfoot>
-				<tr>
-					<th colspan="2">Subtotal</th>
-					<th>@Model.CartItems.Sum(x => (x.Product.UnitPrice) * x.Quantity).ToString("c")</th>
-				</tr>
-			</tfoot>
-		</table>
-	</div>
-}
+<section class="mutedbackground">
+	<br />
+		<div class="row col-7 m-auto">
+			<table class="table table-sm table-hover table-dark table-borderless" cellpadding="0">
+				<thead class="">
+					<tr>
+						<th>Product</th>
+						<th>Quantity</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+				@foreach (var item in Model.CartItems)
+				{
+					<tr>
+						<td>@item.Product.Brand</td>
+						<td>
+							@item.Quantity
+						</td>
+						<td>@(item.Product.UnitPrice.ToString("c"))</td>
+					</tr>
+				}
+				<tfoot>
+					<tr>
+						<th colspan="2" class="text-right">Subtotal:&nbsp; </th>
+						<th>@Model.CartItems.Sum(x => (x.Product.UnitPrice) * x.Quantity).ToString("c")</th>
+					<tr>
+						<th colspan="2" class="text-right">Tax:&nbsp; </th>
+						<th>@Model.CartItems.Sum(x => ((x.Product.UnitPrice) * x.Quantity) * .07m).ToString("c")</th>
+					</tr>
+					<tr>
+						<th colspan="2" class="text-right">Shipping:&nbsp; </th>
+						<th>@Model.CartItems.Sum(x => ((x.Product.UnitPrice) * x.Quantity) * 0.01m).ToString("c")</th>
+					</tr>
+					<tr>
+						<th colspan="2" class="text-right">Total:&nbsp; </th>
+						<th class="border-bottom-0 border-dark">@Model.CartItems.Sum(x => ((x.Product.UnitPrice) * x.Quantity) * 1.07m + 20).ToString("c")</th>
+					</tr>
+				</tfoot>
+			</table>
+			<a class="btn-sm regButt" asp-controller="Checkout" asp-action="shoppingCart">Back to Cart</a>
+		</div>
+		<br />
 
+	@if (!this.ViewContext.ModelState.IsValid)
+	{
+		<div asp-validation-summary="All" class="alert alert-danger"></div>
+	}
+</section>
+<hr class="homeRule" />
 
-@if (!this.ViewContext.ModelState.IsValid)
-{
-	<div asp-validation-summary="All" class="alert alert-danger"></div>
-}
 <section class="mutedbackground">
 	<form class="pl-5" method="post" asp-action="Index" asp-controller="Checkout" novalidate>
 		<!--		<form class="pl-5" id="bootstrap-overrides" method="post" action="">-->
 		@Html.AntiForgeryToken()
 		<fieldset>
-			<legend>Personal Profile Information</legend>
+			<legend>Checkout Information</legend>
 			<div class="row">
 				<div class="col">
 					@Html.LabelFor(m => m.CustomerFirstName)
@@ -132,8 +143,8 @@
 			</div>
 		</fieldset>
 		<div class="pb-3 ml-5">
-			<input type="submit" value="Submit Information" />&nbsp;&nbsp;
-			<input type="reset" value="Reset Form" />
+			<input class="regButt" type="submit" value="Submit Information" />&nbsp;&nbsp;
+			<input class="regButt" type="reset" value="Reset Form" />
 		</div>
 	</form>
 	<br />

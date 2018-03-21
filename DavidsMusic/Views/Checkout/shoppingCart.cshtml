@@ -1,0 +1,50 @@
+﻿@model DavidsMusic.Models.CheckoutModel
+
+@{
+	ViewData["Title"] = "Shopping Cart";
+
+}
+<section class="bg-dark p-0 m-0">
+	<header class="pages">@ViewData["Title"]</header>
+</section>
+
+<section class="mutedbackground">
+	<br />
+	@if (Model.CartItems != null)
+	{
+		<div class="row col-11 m-auto">
+			<table class="table table-sm table-hover table-borderless" cellpadding="0">
+				<thead class="thead-dark">
+					<tr>
+						<th>Product</th>
+						<th>Quantity</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+				@foreach (var item in Model.CartItems)
+				{
+					<tr>
+						<td class="borderless">@item.Product.Brand @item.Product.Type</td>
+						<td>
+							<form asp-action="update" asp-controller="Checkout" method="post" class="form-inline">
+								<input name="productId" value="@item.Product.ID" type="hidden" />
+								<input name="quantity" value="@item.Quantity" type="number" class="form-control-sm" />
+								<input type="submit" value="Update Quantity" class="btn-sm regButt" />
+							</form>
+						</td>
+						<td>@(item.Product.UnitPrice.ToString("c"))</td>
+					</tr>
+				}
+					<tfoot>
+						<tr>
+							<th colspan="2" class="text-right">Subtotal:&nbsp; </th>
+							<th class="border-bottom-0 border-dark">@Model.CartItems.Sum(x => (x.Product.UnitPrice) * x.Quantity).ToString("c")</th>
+						</tr>
+					</tfoot>
+			</table>
+
+		</div>
+	}
+	<a class="btn-sm regButt ml-5" value="Checkout" asp-controller="Checkout" asp-action="index">Checkout</a>
+	<br /><br />
+</section>

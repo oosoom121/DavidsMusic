@@ -9,12 +9,20 @@ body {
     padding-right: 15px;
 }
 
+.cb-color {
+	background-color: lightblue;
+}
+
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
 }
 
+.table-borderless td,
+.table-borderless th {
+	border: 0;
+}
 /* Checkout Page */
 /*.formatForm {
 	display: flex;
@@ -50,6 +58,10 @@ footer {
 }
 form {
 	width: 90%
+}
+
+.errorBackground {
+	background-color: rgba(255, 179, 179,0.7);
 }
 
 .mutedbackground {
