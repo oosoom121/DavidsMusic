@@ -25,14 +25,14 @@ namespace DavidsMusic.Controllers
 
 		public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Welcome to Sharps /& Trebles Music";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Let us hear from you";
 
             return View();
         }

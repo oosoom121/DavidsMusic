@@ -55,13 +55,13 @@ namespace DavidsMusic
 				});
 				context.Products.Add(new Products
 				{
-					Brand = "Gibson",
-					Type = "Guitar",
-					StockNumber = 12341,
-					Description = "Gibson Les Paul\nGibson VOS '57Les Paul Goldtop (Reissue).",
-					ImageUrl = "/images/LP-3.png",
-					UnitPrice = 3255.00M,
-					Category = context.Categories.First(x => x.Id == 1)
+					Brand = "Casio",
+					Type = "Piano",
+					StockNumber = 7807,
+					Description = "Casio Privia PX-780 features a new redesigned 88 note Tri-sensor scaled hammer action keyboard. It reproduce the sound of the finest acoustic grand pianos.",
+					ImageUrl = "/images/caspx780cb7.png",
+					UnitPrice = 1399.99M,
+					Category = context.Categories.First(x => x.Id == 2)
 
 				});
 				context.Products.Add(new Products
@@ -77,13 +77,13 @@ namespace DavidsMusic
 
 				context.Products.Add(new Products
 				{
-					Brand = "Gibson",
-					Type = "Guitar",
-					StockNumber = 12343,
-					Description = "Gibson Les Paul\nGibson Custom 1959 Les Paul Standard Reissue.",
-					ImageUrl = "/images/LP-5.png",
+					Brand = "ROLAND ",
+					Type = "Piano",
+					StockNumber = 12603,
+					Description = "Roland DP-603 - A SLIM AND STYLISH DIGITAL PIANO!  Features Roland’s latest SuperNATURAL Piano Modeling for rich, authentic sounds and a PHA - 50 keyboard that feels so expressive to play.",
+					ImageUrl = "/images/RolakdDp603.png",
 					UnitPrice = 2855.00M,
-					Category = context.Categories.First(x => x.Id == 1)
+					Category = context.Categories.First(x => x.Id == 2)
 				});
 
 				context.Products.Add(new Products
